@@ -66,6 +66,7 @@ def run_analysis(df):
     recent_remarks = df[remarks_col].dropna().tail(20).tolist()
 
     insight_text = "Noe insights available."
+    
     if GEMINI_API_KEY and recent_remarks:
         try:
             genai.configure(api_key = GEMINI_API_KEY)
