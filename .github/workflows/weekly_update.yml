@@ -3,7 +3,7 @@ name: Weekly AI Update
 on:
   schedule:
     - cron: '0 0 * * 0'
-  worflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:
