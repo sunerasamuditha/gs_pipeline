@@ -1,0 +1,454 @@
+{
+    "last_updated": "2025-12-01",
+    "total_seminars": 1668,
+    "total_students": 76961,
+    "nlp_insights": "No insights available.",
+    "anomalies": [
+        {
+            "Date": "2024-06-12",
+            "Name of the School ": "R/Kuruwita Central College ",
+            "Number of Students participated": 196.0
+        },
+        {
+            "Date": "2024-06-18",
+            "Name of the School ": "Mo/ Nannapurawa Maha Vidyalaya",
+            "Number of Students participated": 210.0
+        },
+        {
+            "Date": "2024-06-24",
+            "Name of the School ": "President College, Minuwangoda",
+            "Number of Students participated": 220.0
+        },
+        {
+            "Date": "2024-06-10",
+            "Name of the School ": "A/Ranpathwila maha vidhyalaya",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2024-06-13",
+            "Name of the School ": "A/Isipathana maha vidhyalaya",
+            "Number of Students participated": 300.0
+        },
+        {
+            "Date": "2024-06-10",
+            "Name of the School ": "A/Madatugama Sri Rewatha maha vidhyalaya",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2024-07-11",
+            "Name of the School ": "H/Beliatta central College",
+            "Number of Students participated": 280.0
+        },
+        {
+            "Date": "2024-07-11",
+            "Name of the School ": "K/Palannoruwa Central Collage",
+            "Number of Students participated": 202.0
+        },
+        {
+            "Date": "2024-07-11",
+            "Name of the School ": "Ke/ Hettimulla Nawa Maha Vidyalaya ",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2024-07-03",
+            "Name of the School ": "Pamunugamuwa Maha Vidyalaya",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-07-17",
+            "Name of the School ": "President College.Veyangoda ",
+            "Number of Students participated": 260.0
+        },
+        {
+            "Date": "2024-07-22",
+            "Name of the School ": "Sri sumangala maha Vidyalaya , Ussapitiya",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2024-08-05",
+            "Name of the School ": "Kengalla M.V",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2024-08-24",
+            "Name of the School ": "H/Ranna maha vidyalaya",
+            "Number of Students participated": 220.0
+        },
+        {
+            "Date": "2024-08-07",
+            "Name of the School ": "Mahamaya Balika Vidyalaya ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-08-15",
+            "Name of the School ": "Sri Medhankara Maha Vidyalaya- Horana",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2024-08-21",
+            "Name of the School ": "Urapola Central College ",
+            "Number of Students participated": 264.0
+        },
+        {
+            "Date": "2024-08-27",
+            "Name of the School ": "Yakkala Anura Central College",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2024-07-30",
+            "Name of the School ": "Gonsalbes College Pamunugama",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-08-06",
+            "Name of the School ": "Malabe Boys' School ",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2024-08-27",
+            "Name of the School ": "Pahathagama Roman Catholic College ",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2024-08-30",
+            "Name of the School ": "Agamathi Balika Vidyalaya",
+            "Number of Students participated": 220.0
+        },
+        {
+            "Date": "2024-09-02",
+            "Name of the School ": "Radawana Mahagamasekara Vidyalaya",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2024-09-02",
+            "Name of the School ": "H/Mahanaga National School",
+            "Number of Students participated": 210.0
+        },
+        {
+            "Date": "2024-09-05",
+            "Name of the School ": "Wattegama Balika MV",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2024-09-03",
+            "Name of the School ": "Dikkumbura Siddhartha Maha Vidyalaya ",
+            "Number of Students participated": 210.0
+        },
+        {
+            "Date": "2024-09-03",
+            "Name of the School ": "Veera Keppatipola Central School Akuramboda ",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2024-09-09",
+            "Name of the School ": "Sri Naga National School ",
+            "Number of Students participated": 230.0
+        },
+        {
+            "Date": "2024-09-09",
+            "Name of the School ": "Parakramabahu National School , Polgahawela ",
+            "Number of Students participated": 216.0
+        },
+        {
+            "Date": "2024-09-19",
+            "Name of the School ": "President girl's college,Kotte ",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2024-09-19",
+            "Name of the School ": "President girls' college,Kotte",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2024-09-19",
+            "Name of the School ": "Girls High School ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-09-13",
+            "Name of the School ": "Parakrama Maha Vidyalaya Bandarawaththa",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2024-09-30",
+            "Name of the School ": "St marys College Negombo",
+            "Number of Students participated": 310.0
+        },
+        {
+            "Date": "2024-09-19",
+            "Name of the School ": "Batapola Maha Vidyalaya ",
+            "Number of Students participated": 197.0
+        },
+        {
+            "Date": "2024-09-06",
+            "Name of the School ": "Ginthota Maha Vidyalaya ",
+            "Number of Students participated": 196.0
+        },
+        {
+            "Date": "2024-10-03",
+            "Name of the School ": "St.Mary's College , Kegalle ",
+            "Number of Students participated": 166.0
+        },
+        {
+            "Date": "2024-10-03",
+            "Name of the School ": "Pothuwila Maha Vidyalaya ",
+            "Number of Students participated": 172.0
+        },
+        {
+            "Date": "2024-10-03",
+            "Name of the School ": "Science College ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-09-27",
+            "Name of the School ": "Kirindiwela Central College ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-09-30",
+            "Name of the School ": "St marys College Negombo",
+            "Number of Students participated": 310.0
+        },
+        {
+            "Date": "2024-10-09",
+            "Name of the School ": "Rajasingha Madya Maha Vidyalaya ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-10-16",
+            "Name of the School ": "Sri Ganawasa National School",
+            "Number of Students participated": 260.0
+        },
+        {
+            "Date": "2024-10-14",
+            "Name of the School ": "A/ Thalawa Maha Vidyalaya ",
+            "Number of Students participated": 900.0
+        },
+        {
+            "Date": "2024-10-24",
+            "Name of the School ": "Sri Rahula Maha Vidyalaya ",
+            "Number of Students participated": 170.0
+        },
+        {
+            "Date": "2024-10-22",
+            "Name of the School ": "President College,Rajagiriya ",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2024-11-04",
+            "Name of the School ": "Prince of Wales college ",
+            "Number of Students participated": 450.0
+        },
+        {
+            "Date": "2024-11-05",
+            "Name of the School ": "Dharmasena Atigala balika Vidyalaya",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2024-11-11",
+            "Name of the School ": "A/ Rabewa Madya Maha Vidyalaya ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-11-20",
+            "Name of the School ": "A/ Galnewa Central College ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-11-18",
+            "Name of the School ": "A/ Horowpathana Ruwanweli Central College ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2024-11-07",
+            "Name of the School ": "Wadduwa Central College ",
+            "Number of Students participated": 230.0
+        },
+        {
+            "Date": "2024-12-05",
+            "Name of the School ": "Bope Rajasinghe Vidyalaya",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2025-01-03",
+            "Name of the School ": "Convent of Our Lady of Victorious ",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2025-01-08",
+            "Name of the School ": "Kiriella Central Collage ",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2025-01-13",
+            "Name of the School ": "Mo/Thanamalwila Central College",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2024-11-07",
+            "Name of the School ": "Mahamaya Balika Vidyalaya Kadawatha",
+            "Number of Students participated": 180.0
+        },
+        {
+            "Date": "2025-01-07",
+            "Name of the School ": "Thurstan College ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2025-01-27",
+            "Name of the School ": "Sri Medhankara Maha Vidyalaya",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2025-01-24",
+            "Name of the School ": "Horowpothana Ruwanwali Central College ",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2025-01-23",
+            "Name of the School ": "H/Hungama Vijayaba National School",
+            "Number of Students participated": 280.0
+        },
+        {
+            "Date": "2025-01-23",
+            "Name of the School ": "H/Beliatta Central Collage",
+            "Number of Students participated": 220.0
+        },
+        {
+            "Date": "2025-01-27",
+            "Name of the School ": "Sarasavi Uyana Vidyalaya ",
+            "Number of Students participated": 220.0
+        },
+        {
+            "Date": "2025-01-28",
+            "Name of the School ": "Elpitiya Ananda Maha Vidyalaya ",
+            "Number of Students participated": 203.0
+        },
+        {
+            "Date": "2025-01-30",
+            "Name of the School ": "H/Ranna Rohana Raja National School",
+            "Number of Students participated": 216.0
+        },
+        {
+            "Date": "2025-01-28",
+            "Name of the School ": "Thalawa Maha Vidyalaya",
+            "Number of Students participated": 250.0
+        },
+        {
+            "Date": "2025-02-05",
+            "Name of the School ": "St.Joseph College, Negombo",
+            "Number of Students participated": 165.0
+        },
+        {
+            "Date": "2025-02-03",
+            "Name of the School ": "Yashodhara Devi Balika Vidyalaya ",
+            "Number of Students participated": 300.0
+        },
+        {
+            "Date": "2025-02-27",
+            "Name of the School ": "Seethadevi Girls' College",
+            "Number of Students participated": 243.0
+        },
+        {
+            "Date": "2025-02-10",
+            "Name of the School ": "Eheliyagoda National School ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2025-02-07",
+            "Name of the School ": "Badulla Central college",
+            "Number of Students participated": 330.0
+        },
+        {
+            "Date": "2025-01-08",
+            "Name of the School ": "Kiriella Central Collage ",
+            "Number of Students participated": 160.0
+        },
+        {
+            "Date": "2025-02-27",
+            "Name of the School ": "Rabukkana sujatha vidyalaya ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2025-02-27",
+            "Name of the School ": "Kegalle st. Mery's collage ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2025-02-10",
+            "Name of the School ": "SP/MR/Sujatha College",
+            "Number of Students participated": 213.0
+        },
+        {
+            "Date": "2025-03-03",
+            "Name of the School ": "Pinnawala central collage ",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2025-02-05",
+            "Name of the School ": "Sir John Kothalawala Vidyalaya ",
+            "Number of Students participated": 175.0
+        },
+        {
+            "Date": "2025-02-21",
+            "Name of the School ": "Dharmashoka College",
+            "Number of Students participated": 212.0
+        },
+        {
+            "Date": "2025-03-05",
+            "Name of the School ": "C M S Sri Jayawardanepura College",
+            "Number of Students participated": 270.0
+        },
+        {
+            "Date": "2025-02-28",
+            "Name of the School ": "Basthiyan Silva Vidyalaya",
+            "Number of Students participated": 200.0
+        },
+        {
+            "Date": "2025-03-03",
+            "Name of the School ": "Thalawakele Tamil Maha Vidyalaya",
+            "Number of Students participated": 170.0
+        },
+        {
+            "Date": "2024-07-31",
+            "Name of the School ": "\u0dc0\u0dd0\u0dbd\u0dca\u0dbd\u0dc0 \u0db8\u0dc4\u0dcf \u0dc0\u0dd2\u0daf\u0dca\u200d\u0dba\u0dcf\u0dbd\u0dba",
+            "Number of Students participated": 280.0
+        },
+        {
+            "Date": "2025-03-11",
+            "Name of the School ": "Urapola Central College ",
+            "Number of Students participated": 250.0
+        }
+    ],
+    "district_breakdown": {
+        "Matara": 218,
+        "Galle": 205,
+        "Colombo": 173,
+        "Gampaha": 143,
+        "Kalutara": 142,
+        "Anuradhapura": 90,
+        "Kurunegala\u2069": 69,
+        "Kandy": 67,
+        "Hambantota": 64,
+        "Kegalle": 60,
+        "Nuwara-Eliya": 52,
+        "Ratnapura": 50,
+        "Matale": 36,
+        "Kurunegala": 31,
+        "Polonnaruwa": 29,
+        "Monaragala": 27,
+        "Badulla": 24,
+        "Puttlam": 14,
+        "Ampara": 12,
+        "puttlam": 11,
+        "Vavuniya": 8,
+        "ratnapura": 5,
+        "Jaffna": 3,
+        "Mannar": 2,
+        "hambantota": 2,
+        "Kilinochchi": 2,
+        "Trincomalee": 2,
+        "Batticaloa": 1,
+        "Mulativu": 1
+    }
+}

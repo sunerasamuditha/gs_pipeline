@@ -15,12 +15,38 @@ def fetch_data():
     print("Connecting to Google Sheets...")
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
-    creds_json = json.loads(os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"))
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+    if os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"):
+        creds_json = json.loads(os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"))
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+    elif os.path.exists("service_account.json"):
+        creds = ServiceAccountCredentials.from_json_keyfile_name("service_account.json", scope)
+    else:
+        raise Exception("Google Sheets credentials not found. Set GOOGLE_SHEETS_CREDENTIALS_JSON env var or ensure service_account.json exists.")
+
     client = gspread.authorize(creds)
 
     sheet = client.open(SHEET_NAME).sheet1
-    live_data = pd.DataFrame(sheet.get_all_records())
+    
+    # Use get_all_values to avoid issues with duplicate/empty headers
+    all_values = sheet.get_all_values()
+    if all_values:
+        headers = all_values[0]
+        # Deduplicate headers
+        seen = {}
+        new_headers = []
+        for h in headers:
+            if h in seen:
+                seen[h] += 1
+                new_headers.append(f"{h}.{seen[h]}")
+            else:
+                seen[h] = 0
+                new_headers.append(h)
+        headers = new_headers
+
+        data = all_values[1:]
+        live_data = pd.DataFrame(data, columns=headers)
+    else:
+        live_data = pd.DataFrame()
 
     historical_data = pd.read_csv(CSV_PATH)
 
@@ -46,7 +72,7 @@ def clean_data(df):
 
     df['clean_volunteers'] = df[volunteer_col].apply(extract_names)
 
-    student_col = 'Number of Students Participated'
+    student_col = 'Number of Students participated'
     df[student_col] = pd.to_numeric(df[student_col], errors = 'coerce').fillna(0)
 
     return df
@@ -55,17 +81,17 @@ def run_analysis(df):
 
     print("Running AI Models...")
 
-    stats = df['Number of Students Participated'].describe()
+    stats = df['Number of Students participated'].describe()
     mean = stats['mean']
     std = stats['std']
 
-    df['is_anomaly'] = abs(df['Number of Students Participated'] - mean) > 2 * std
+    df['is_anomaly'] = abs(df['Number of Students participated'] - mean) > 2 * std
     anomalies = df[df['is_anomaly']].copy()
 
     remarks_col = "Any remarks on the school or seminar."
     recent_remarks = df[remarks_col].dropna().tail(20).tolist()
 
-    insight_text = "Noe insights available."
+    insights_text = "No insights available."
     
     if GEMINI_API_KEY and recent_remarks:
         try:
@@ -85,12 +111,15 @@ def main():
     df = clean_data(df)
     anomalies, nlp_insights = run_analysis(df)
 
+    if not anomalies.empty:
+        anomalies['Date'] = anomalies['Date'].dt.strftime('%Y-%m-%d').fillna('')
+
     output = {
         "last_updated": datetime.now().strftime("%Y-%m-%d"),
         "total_seminars": len(df),
         "total_students": int(df['Number of Students participated'].sum()),
         "nlp_insights": nlp_insights,
-        "anomalies": anomalies[['Date', 'Name of the School', 'Number of Students participated']].to_dict(orient='records'),
+        "anomalies": anomalies[['Date', 'Name of the School ', 'Number of Students participated']].to_dict(orient='records'),
         "district_breakdown": df['District'].value_counts().to_dict()
     }
 
