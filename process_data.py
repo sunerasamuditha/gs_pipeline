@@ -96,7 +96,7 @@ def run_analysis(df):
     if GEMINI_API_KEY and recent_remarks:
         try:
             genai.configure(api_key = GEMINI_API_KEY)
-            model = genai.GenerativeModel('gemini-pro')
+            model = genai.GenerativeModel('gemini-2.5-flash')
             prompt = f"Analyze these seminar remarks and give 3 bullet points on key operational issues or praise: {recent_remarks}"
             response = model.generate_content(prompt)
             insights_text = response.text
