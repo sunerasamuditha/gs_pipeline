@@ -1,6 +1,6 @@
 import pandas as pd
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 import json
 import os
 import google.generativeai as genai
@@ -17,9 +17,12 @@ def fetch_data():
 
     if os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"):
         creds_json = json.loads(os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"))
-        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_json, scope)
+        # Fix for potential newline escaping issues in GitHub Secrets
+        if 'private_key' in creds_json:
+             creds_json['private_key'] = creds_json['private_key'].replace('\\n', '\n')
+        creds = Credentials.from_service_account_info(creds_json, scopes=scope)
     elif os.path.exists("service_account.json"):
-        creds = ServiceAccountCredentials.from_json_keyfile_name("service_account.json", scope)
+        creds = Credentials.from_service_account_file("service_account.json", scopes=scope)
     else:
         raise Exception("Google Sheets credentials not found. Set GOOGLE_SHEETS_CREDENTIALS_JSON env var or ensure service_account.json exists.")
 
