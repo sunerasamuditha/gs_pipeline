@@ -17,7 +17,6 @@ def fetch_data():
 
     if os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"):
         creds_json = json.loads(os.environ.get("GOOGLE_SHEETS_CREDENTIALS_JSON"))
-        # Fix for potential newline escaping issues in GitHub Secrets
         if 'private_key' in creds_json:
              creds_json['private_key'] = creds_json['private_key'].replace('\\n', '\n')
         creds = Credentials.from_service_account_info(creds_json, scopes=scope)
@@ -30,11 +29,9 @@ def fetch_data():
 
     sheet = client.open(SHEET_NAME).sheet1
     
-    # Use get_all_values to avoid issues with duplicate/empty headers
     all_values = sheet.get_all_values()
     if all_values:
         headers = all_values[0]
-        # Deduplicate headers
         seen = {}
         new_headers = []
         for h in headers:
