@@ -81,11 +81,34 @@ def run_analysis(df):
 
     print("Running AI Models...")
 
-    stats = df['Number of Students participated'].describe()
-    mean = stats['mean']
-    std = stats['std']
+    # Calculate Global Stats (Fallback)
+    global_mean = df['Number of Students participated'].mean()
+    global_std = df['Number of Students participated'].std()
 
-    df['is_anomaly'] = abs(df['Number of Students participated'] - mean) > 2 * std
+    # Calculate Local Stats (Per District)
+    groups = df.groupby('District')['Number of Students participated']
+    df['local_mean'] = groups.transform('mean')
+    df['local_std'] = groups.transform('std')
+    df['local_count'] = groups.transform('count')
+
+    def detect_anomaly(row):
+        val = row['Number of Students participated']
+        
+        # Use local district stats if we have enough data (e.g., >= 5 seminars)
+        if row['local_count'] >= 5 and pd.notna(row['local_std']) and row['local_std'] > 0:
+            mean = row['local_mean']
+            std = row['local_std']
+        else:
+            mean = global_mean
+            std = global_std
+
+        if std == 0: return False
+
+        z_score = abs(val - mean) / std
+        # Criteria: > 2 std devs AND > 30 students difference (to filter noise)
+        return z_score > 2 and abs(val - mean) > 30
+
+    df['is_anomaly'] = df.apply(detect_anomaly, axis=1)
     anomalies = df[df['is_anomaly']].copy()
 
     remarks_col = "Any remarks on the school or seminar."
