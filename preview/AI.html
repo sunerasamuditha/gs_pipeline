@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganitha Saviya AI Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #09090b;
+            --card-bg: #18181b;
+            --text-primary: #f4f4f5;
+            --text-secondary: #a1a1aa;
+            --accent-primary: #8b5cf6; /* Violet */
+            --accent-secondary: #06b6d4; /* Cyan */
+            --accent-gradient: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 3rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Grid Layout */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .card-title {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        /* KPI Cards */
+        .kpi-card {
+            grid-column: span 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--accent-gradient);
+        }
+
+        .kpi-value {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+        }
+
+        .kpi-label {
+            margin-top: 0.5rem;
+            color: var(--accent-secondary);
+        }
+
+        /* Charts & Content */
+        .chart-card {
+            grid-column: span 8;
+            height: 400px;
+        }
+
+        .insights-card {
+            grid-column: span 4;
+            background: linear-gradient(145deg, #18181b 0%, #1e1e24 100%);
+        }
+
+        .insights-content {
+            height: 320px;
+            overflow-y: auto;
+            padding-right: 10px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #d4d4d8;
+        }
+
+        .insights-content strong {
+            color: var(--accent-secondary);
+        }
+
+        .insights-content ul {
+            padding-left: 1.2rem;
+        }
+
+        .insights-content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Anomalies Table */
+        .anomalies-card {
+            grid-column: span 12;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid #3f3f46;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #27272a;
+            color: var(--text-primary);
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .anomaly-badge {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #18181b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3f3f46;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #52525b;
+        }
+
+        /* Animations */
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .kpi-card { grid-column: span 6; }
+            .chart-card { grid-column: span 12; }
+            .insights-card { grid-column: span 12; }
+        }
+        @media (max-width: 768px) {
+            .kpi-card { grid-column: span 12; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ganitha Saviya AI Dashboard</h1>
+            <div class="subtitle">Real-time Analysis & Insights • Last Updated: <span id="last-updated">Loading...</span></div>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- KPI 1 -->
+            <div class="card kpi-card delay-1">
+                <div class="card-title">Total Seminars</div>
+                <div class="kpi-value" id="total-seminars">0</div>
+                <div class="kpi-label">Sessions Conducted</div>
+            </div>
+
+            <!-- KPI 2 -->
+            <div class="card kpi-card delay-2">
+                <div class="card-title">Total Students</div>
+                <div class="kpi-value" id="total-students">0</div>
+                <div class="kpi-label">Lives Impacted</div>
+            </div>
+
+            <!-- Insights -->
+            <div class="card insights-card delay-3">
+                <div class="card-title">✨ AI Generated Insights (Gemini 2.5)</div>
+                <div class="insights-content" id="nlp-insights">
+                    Loading AI analysis...
+                </div>
+            </div>
+
+            <!-- Chart -->
+            <div class="card chart-card delay-4">
+                <div class="card-title">District Breakdown</div>
+                <canvas id="districtChart"></canvas>
+            </div>
+
+            <!-- Anomalies -->
+            <div class="card anomalies-card delay-4" style="animation-delay: 0.5s;">
+                <div class="card-title">⚠️ Detected Anomalies (Attendance Outliers)</div>
+                <div class="table-container">
+                    <table id="anomalies-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>School Name</th>
+                                <th>Students</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('../dashboard_data.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+
+                // Update Header & KPIs
+                document.getElementById('last-updated').textContent = data.last_updated;
+                animateValue("total-seminars", 0, data.total_seminars, 1500);
+                animateValue("total-students", 0, data.total_students, 2000);
+
+                // Update NLP Insights
+                document.getElementById('nlp-insights').innerHTML = marked.parse(data.nlp_insights);
+
+                // Render Chart
+                renderChart(data.district_breakdown);
+
+                // Render Anomalies
+                renderAnomalies(data.anomalies);
+
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.querySelector('.container').innerHTML += `
+                    <div style="color: #ef4444; margin-top: 20px; text-align: center;">
+                        <h3>Error Loading Data</h3>
+                        <p>Please ensure you are running this on a local server (e.g., VS Code Live Server) to fetch the JSON file.</p>
+                        <p>Error details: ${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        function renderChart(districtData) {
+            const ctx = document.getElementById('districtChart').getContext('2d');
+            
+            // Sort data
+            const sortedEntries = Object.entries(districtData).sort((a, b) => b[1] - a[1]);
+            const labels = sortedEntries.map(e => e[0]);
+            const values = sortedEntries.map(e => e[1]);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Seminars per District',
+                        data: values,
+                        backgroundColor: 'rgba(139, 92, 246, 0.6)',
+                        borderColor: '#8b5cf6',
+                        borderWidth: 1,
+                        borderRadius: 4,
+                        hoverBackgroundColor: '#06b6d4'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#18181b',
+                            titleColor: '#f4f4f5',
+                            bodyColor: '#a1a1aa',
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#a1a1aa' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { color: '#a1a1aa' }
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderAnomalies(anomalies) {
+            const tbody = document.querySelector('#anomalies-table tbody');
+            tbody.innerHTML = '';
+
+            anomalies.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.Date}</td>
+                    <td>${item['Name of the School ']}</td>
+                    <td>${item['Number of Students participated']}</td>
+                    <td><span class="anomaly-badge">Outlier</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', loadDashboardData);
+    </script>
+</body>
+</html>
