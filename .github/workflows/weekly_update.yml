@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip' # <--- NEW: Caches dependencies to speed up runs
+          cache: 'pip'
 
       - name: Install dependencies
         run: |
@@ -28,7 +28,6 @@ jobs:
 
       - name: Run Analysis Script
         env:
-          # These must match the names in your GitHub Secrets
           GOOGLE_SHEETS_CREDENTIALS_JSON: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS_JSON }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python process_data.py
@@ -37,7 +36,7 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add dashboard_data.json
-          # The "|| echo" prevents failure if data hasn't changed
+          # ADD BOTH FILES HERE:
+          git add dashboard_data.json reports_data.json
           git commit -m 'Weekly Data Update' || echo "No changes to commit"
           git push

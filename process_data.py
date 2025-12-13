@@ -32,7 +32,6 @@ def fetch_data():
     client = gspread.authorize(creds)
     spreadsheet = client.open(SHEET_NAME)
     
-    # Try to open 'Form responses 1', fallback to first sheet if not found
     try:
         sheet = spreadsheet.worksheet("Form responses 1")
     except gspread.exceptions.WorksheetNotFound:
@@ -69,10 +68,18 @@ def fetch_data():
 
 def clean_data(df):
     print(f"Cleaning data... Initial count: {len(df)}")
-    # Assuming DD/MM/YYYY format based on typical regional usage
+    
+    # 1. Standardize Dates
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
 
-    # Identify Volunteer Column safely
+    # 2. Text Normalization (Critical for Reports & Search)
+    # Converts "GALLE", "galle ", "Galle" -> "Galle"
+    text_columns = ['District', 'Name of the School ', 'Medium', 'Type of Seminar']
+    for col in text_columns:
+        if col in df.columns:
+            df[col] = df[col].astype(str).str.strip().str.title()
+
+    # 3. Volunteer Parsing
     volunteer_cols = [c for c in df.columns if 'Sasnaka Sansada member' in c]
     volunteer_col = volunteer_cols[0] if volunteer_cols else None
 
@@ -95,77 +102,81 @@ def clean_data(df):
     print(f"Data cleaned. Rows remaining: {len(df)}")
     return df
 
+# --- REPORT GENERATOR EXPORT ---
+def export_report_data(df):
+    print("Exporting data for Report Generator...")
+    
+    # Select safe, public columns for the website
+    safe_columns = [
+        'Date', 'District', 'Name of the School ', 'Type of Seminar', 
+        'Medium', 'Number of Students participated'
+    ]
+    
+    existing_cols = [c for c in safe_columns if c in df.columns]
+    report_df = df[existing_cols].copy()
+    
+    # Format Date for JSON (String YYYY-MM-DD)
+    report_df['Date'] = report_df['Date'].dt.strftime('%Y-%m-%d')
+    
+    # Join Volunteers into a single string for PDF Table
+    if 'clean_volunteers' in df.columns:
+        report_df['Volunteers'] = df['clean_volunteers'].apply(lambda x: ", ".join(x) if isinstance(x, list) else str(x))
+    
+    # Save to JSON
+    with open('reports_data.json', 'w') as f:
+        json.dump(report_df.to_dict(orient='records'), f, indent=4)
+        
+    print(f"Success! reports_data.json created with {len(report_df)} records.")
+
 # --- AI MODEL 1: RESOURCE FORECASTER (XGBoost) ---
 def run_resource_forecaster(df):
     print("Running AI Model 1: Resource Forecaster...")
     try:
-        # 1. Feature Engineering
         model_df = df.copy()
-        initial_count = len(model_df)
         model_df = model_df.dropna(subset=['Date', 'District'])
-        dropped_count = initial_count - len(model_df)
-        if dropped_count > 0:
-            print(f"  - Note: {dropped_count} rows dropped due to missing Date/District for forecasting.")
         
+        if len(model_df) < 10: return {}
+
         model_df['Month'] = model_df['Date'].dt.month
-        # Exam Season in SL: May, August, December usually
         model_df['Is_Exam_Season'] = model_df['Month'].isin([5, 8, 12]).astype(int)
         
-        # Prepare Data for Training
         X = model_df[['Month', 'Is_Exam_Season', 'District']]
-        # One-Hot Encode District
         X = pd.get_dummies(X, columns=['District'], drop_first=False)
         y = model_df['Number of Students participated']
 
-        if len(X) < 10: return {} # Not enough data
-
-        # Train XGBoost
         model = XGBRegressor(n_estimators=100, objective='reg:squarederror', random_state=42)
         model.fit(X, y)
 
-        # 2. Predict for Next Month
-        next_month_date = datetime.now() + timedelta(days=30)
-        next_month = next_month_date.month
+        # Predict Next Month
+        next_month = (datetime.now() + timedelta(days=30)).month
         is_exam = 1 if next_month in [5, 8, 12] else 0
         
         forecasts = {}
-        # Predict for top 5 active districts
         top_districts = df['District'].value_counts().head(5).index.tolist()
 
         for district in top_districts:
-            # Create input row
-            input_data = {
-                'Month': [next_month],
-                'Is_Exam_Season': [is_exam]
-            }
-            # Add district dummy columns (set 1 for current district, 0 for others)
+            input_data = {'Month': [next_month], 'Is_Exam_Season': [is_exam]}
             for col in X.columns:
                 if col.startswith('District_'):
                     dist_name = col.replace('District_', '')
                     input_data[col] = [1 if dist_name == district else 0]
             
-            # Align columns with training data
-            input_df = pd.DataFrame(input_data)
-            # Ensure order matches training
-            input_df = input_df.reindex(columns=X.columns, fill_value=0)
-            
+            input_df = pd.DataFrame(input_data).reindex(columns=X.columns, fill_value=0)
             pred_students = max(0, int(model.predict(input_df)[0]))
             
             forecasts[district] = {
                 "predicted_students": pred_students,
-                "paper_sheets_needed": int(pred_students * 5 * 1.15) # 5 sheets + 15% buffer
+                "paper_sheets_needed": int(pred_students * 5 * 1.15)
             }
-            
         return forecasts
     except Exception as e:
         print(f"Resource Forecaster Error: {e}")
         return {}
 
-# --- AI MODEL 2: VOLUNTEER RISK (Heuristic/Behavioral) ---
+# --- AI MODEL 2: VOLUNTEER RISK ---
 def run_volunteer_risk_model(df):
     print("Running AI Model 2: Volunteer Risk...")
     try:
-        # Explode volunteers to rows
         vol_data = []
         for _, row in df.iterrows():
             if pd.isna(row['Date']): continue
@@ -178,16 +189,12 @@ def run_volunteer_risk_model(df):
         current_date = datetime.now()
         risky_volunteers = []
 
-        # Analyze each volunteer
         for name, group in v_df.groupby('Name'):
             group = group.sort_values('Date')
             last_active = group['Date'].max()
             days_inactive = (current_date - last_active).days
-            total_events = len(group)
             
-            # Check for Burnout (Too many events recently)
             recent_events = group[group['Date'] > (current_date - timedelta(days=30))]
-            
             risk_level = "Low"
             reason = ""
 
@@ -206,24 +213,20 @@ def run_volunteer_risk_model(df):
                     "last_active": last_active.strftime('%Y-%m-%d')
                 })
 
-        # Return top 10 risks
         return sorted(risky_volunteers, key=lambda x: x['last_active'])[:10]
     except Exception as e:
         print(f"Volunteer Risk Error: {e}")
         return []
 
-# --- AI MODEL 3: DEMAND PROPAGATION (NetworkX) ---
+# --- AI MODEL 3: DEMAND PROPAGATION ---
 def run_demand_model(df):
     print("Running AI Model 3: Network Demand...")
     try:
         G = nx.Graph()
-        
-        # Build Graph: School <-> Volunteer
         for _, row in df.iterrows():
             school_raw = row.get('Name of the School ', '')
-            if pd.isna(school_raw) or str(school_raw).strip().lower() == 'nan' or str(school_raw).strip() == '':
-                continue
-                
+            if pd.isna(school_raw) or str(school_raw).strip() == '': continue
+            
             school = str(school_raw).strip()
             G.add_node(school, type='school')
             
@@ -231,47 +234,41 @@ def run_demand_model(df):
                 G.add_node(vol, type='volunteer')
                 G.add_edge(school, vol)
 
-        # Calculate Centrality (Influence)
         centrality = nx.degree_centrality(G)
-        
         predictions = []
         schools = [n for n, d in G.nodes(data=True) if d.get('type') == 'school']
         
         for school in schools:
-            # Score = Avg centrality of volunteers who visited
             neighbors = [n for n in G.neighbors(school) if G.nodes[n].get('type') == 'volunteer']
             if not neighbors: continue
             
-            # Network Score calculation
             score = np.mean([centrality[n] for n in neighbors]) * 1000 
+            predictions.append({"school": school, "demand_score": round(score, 2)})
             
-            predictions.append({
-                "school": school,
-                "demand_score": round(score, 2)
-            })
-            
-        # Top 5 schools with strongest network effects
         return sorted(predictions, key=lambda x: x['demand_score'], reverse=True)[:5]
     except Exception as e:
         print(f"Demand Model Error: {e}")
         return []
 
-# --- GEMINI API (Remarks Summary) ---
+# --- GEMINI API ---
 def run_remarks_analysis(df):
     print("Running Gemini AI for Remarks...")
     remarks_col = "Any remarks on the school or seminar."
-    # Filter for non-empty string remarks
+    if remarks_col not in df.columns: return "No remarks column found."
+
     remarks_series = df[remarks_col].dropna().astype(str)
-    remarks_series = remarks_series[remarks_series.str.len() > 5] # Filter short junk
-    all_remarks = remarks_series.tolist()
+    remarks_series = remarks_series[remarks_series.str.len() > 5]
+    all_remarks = remarks_series.tolist() # Analyze all valid remarks
+    
+    # Limit to last 50 to avoid token limits if list is huge
+    if len(all_remarks) > 50: all_remarks = all_remarks[-50:]
 
     insights_text = "No insights available."
-    
     if GEMINI_API_KEY and all_remarks:
         try:
             genai.configure(api_key=GEMINI_API_KEY)
             model = genai.GenerativeModel('gemini-2.5-flash')
-            prompt = f"Analyze these seminar remarks and give 10 bullet points on key operational issues or praise. Be specific and comprehensive: {all_remarks}"
+            prompt = f"Analyze these seminar remarks and give 10 bullet points on key operational issues or praise: {all_remarks}"
             response = model.generate_content(prompt)
             insights_text = response.text
         except Exception as e:
@@ -284,20 +281,20 @@ def main():
         df = fetch_data()
         df = clean_data(df)
 
-        # Run The 4 Engines
+        # 1. Export Report Data (New Feature)
+        export_report_data(df)
+
+        # 2. Run AI Engines
         resource_forecast = run_resource_forecaster(df)
         volunteer_risks = run_volunteer_risk_model(df)
         demand_predictions = run_demand_model(df)
         nlp_insights = run_remarks_analysis(df)
 
-        # Prepare Final Output
         output = {
             "last_updated": datetime.now().strftime("%Y-%m-%d"),
             "total_seminars": len(df),
             "total_students": int(df['Number of Students participated'].sum()),
             "district_breakdown": df['District'].value_counts().to_dict(),
-            
-            # AI Outputs
             "ai_resource_forecast": resource_forecast,
             "ai_volunteer_risks": volunteer_risks,
             "ai_demand_predictions": demand_predictions,
