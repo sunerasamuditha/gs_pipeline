@@ -1,29 +1,30 @@
 {
     "last_updated": "2025-12-13",
-    "total_seminars": 2197,
-    "total_students": 112708,
+    "total_seminars": 2198,
+    "total_students": 112714,
     "district_breakdown": {
         "Matara": 273,
         "Galle": 259,
-        "Colombo": 247,
+        "Colombo": 248,
         "Kalutara": 217,
         "Gampaha": 202,
         "Anuradhapura": 156,
-        "Kurunegala\u2069": 115,
         "Kandy": 112,
         "Hambantota": 94,
         "Kegalle": 84,
         "Nuwara-Eliya": 71,
+        "Kurunegala\u00e2\u0081\u00a9": 69,
         "Ratnapura": 64,
         "Matale": 49,
+        "Kurunegala\u2069": 46,
         "Polonnaruwa": 42,
         "Badulla": 35,
         "Puttlam": 34,
         "Monaragala": 32,
         "Kurunegala": 31,
         "Ampara": 30,
-        "Vavuniya": 11,
         "puttlam": 11,
+        "Vavuniya": 11,
         "Trincomalee": 9,
         "ratnapura": 5,
         "Kilinochchi": 5,
@@ -35,16 +36,16 @@
     },
     "ai_resource_forecast": {
         "Matara": {
-            "predicted_students": 58,
-            "paper_sheets_needed": 333
+            "predicted_students": 57,
+            "paper_sheets_needed": 327
         },
         "Galle": {
             "predicted_students": 33,
             "paper_sheets_needed": 189
         },
         "Colombo": {
-            "predicted_students": 45,
-            "paper_sheets_needed": 258
+            "predicted_students": 46,
+            "paper_sheets_needed": 264
         },
         "Kalutara": {
             "predicted_students": 61,
@@ -124,7 +125,7 @@
         },
         {
             "school": "MR/Pagnalankara Kanitu Vidyalaya",
-            "demand_score": 7.93
+            "demand_score": 7.92
         },
         {
             "school": "MR/Gombaddala Vijayabha Kanitu Vidyalaya",
@@ -136,8 +137,8 @@
         },
         {
             "school": "MR/Diddenipotha Maha Vidyalaya",
-            "demand_score": 6.65
+            "demand_score": 6.64
         }
     ],
-    "ai_remarks_insights": "Here are 10 bullet points summarizing the key operational issues and praise from the seminar remarks:\n\n1.  **Overwhelmingly Positive Reception & High Appreciation:** The seminars consistently received excellent feedback, with schools, principals, teachers, and students expressing high appreciation for the program and its impact. Phrases like \"successful,\" \"very good,\" \"highly appreciated,\" and \"meaningful opportunity\" are widespread.\n2.  **Significant Demand for Future Engagements:** There is a recurring and strong request for *more* seminars. Specifically, schools frequently asked for follow-up \"Paper Seminars,\" \"RTP (Revision, Theory, Practice) Seminars,\" and new seminars in \"Science\" and \"English,\" indicating a desire for broader subject coverage and continued support.\n3.  **Strong School and Teacher Support:** The success of the seminars was heavily reliant on the \"very supportive\" and \"cooperative\" nature of the schools, principals, and teachers, who often provided \"full support,\" \"good support,\" and actively facilitated the programs.\n4.  **Varied Student Engagement and Foundational Gaps:** While many students were praised for being \"friendly,\" \"talented,\" \"knowledgeable,\" and \"supportive,\" a significant number, especially in rural/poor schools, lacked \"mathematical fundamentals\" and scored below basic competency levels (e.g., below 35/50 marks), necessitating a focus on basic concepts.\n5.  **Operational and Coordination Challenges:** Several remarks highlight operational hurdles, including last-minute cancellations due to \"management error\" or \"flood,\" difficulty securing \"two-day permission\" from schools, \"coordination errors,\" and \"lack of space.\" One remark also noted \"GS team had some downs.\"\n6.  **Addressing Discipline Issues:** A notable challenge was encountered with \"disobedient\" students, where the school \"does not prioritise disciplining them.\" A specific suggestion was made for \"only male volunteers\" in future collaborations with such schools, pointing to a need for specific volunteer deployment strategies.\n7.  **Impact on Underserved Communities:** The program effectively reached \"very rural country-side school[s],\" \"poor school[s]\" with \"few facilities,\" and schools where students had \"negative feelings\" about seminars or \"don't know the meaning of the word 'seminar',\" highlighting its crucial role in empowering disadvantaged students and changing perceptions.\n8.  **Effectiveness of Program Components:** The \"motivational programme\" and \"maths games\" were specifically cited as highly appreciated and effective in engaging students and fostering positive feelings towards learning, even for those with initial negative attitudes.\n9.  **Collaborative and Clustered Approach:** Many seminars were conducted \"in combined with\" other schools or as \"seminar clusters\" (e.g., 6 schools), and often coordinated through external entities like district education offices (e.g., North Central Province Mathematics Deputy Director) or foundations (e.g., Sarvodaya), indicating a robust network and outreach strategy.\n10. **Requests for Diversified Program Formats:** Beyond subject-specific seminars, there were requests for \"Maths Camps,\" \"Day Night Math Camp,\" and \"online maths lessons,\" suggesting an opportunity for the program to diversify its offerings and delivery methods to meet evolving school needs."
+    "ai_remarks_insights": "No insights available."
 }

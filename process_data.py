@@ -58,7 +58,12 @@ def fetch_data():
     else:
         live_data = pd.DataFrame()
 
-    historical_data = pd.read_csv(CSV_PATH)
+    try:
+        historical_data = pd.read_csv(CSV_PATH, encoding='utf-8')
+    except UnicodeDecodeError:
+        print("Warning: CSV not UTF-8, trying Latin-1...")
+        historical_data = pd.read_csv(CSV_PATH, encoding='latin1')
+
     combined_df = pd.concat([historical_data, live_data], ignore_index=True)
     return combined_df
 
