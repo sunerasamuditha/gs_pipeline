@@ -258,15 +258,15 @@ def run_remarks_analysis(df):
     # Filter for non-empty string remarks
     remarks_series = df[remarks_col].dropna().astype(str)
     remarks_series = remarks_series[remarks_series.str.len() > 5] # Filter short junk
-    recent_remarks = remarks_series.tail(100).tolist()
+    all_remarks = remarks_series.tolist()
 
     insights_text = "No insights available."
     
-    if GEMINI_API_KEY and recent_remarks:
+    if GEMINI_API_KEY and all_remarks:
         try:
             genai.configure(api_key=GEMINI_API_KEY)
             model = genai.GenerativeModel('gemini-2.5-flash')
-            prompt = f"Analyze these seminar remarks and give 3 bullet points on key operational issues or praise. Be specific: {recent_remarks}"
+            prompt = f"Analyze these seminar remarks and give 10 bullet points on key operational issues or praise. Be specific and comprehensive: {all_remarks}"
             response = model.generate_content(prompt)
             insights_text = response.text
         except Exception as e:
