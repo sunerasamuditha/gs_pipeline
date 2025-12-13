@@ -2,38 +2,42 @@ name: Weekly AI Update
 
 on:
   schedule:
-    - cron: '0 0 * * 0'
-  workflow_dispatch:
+    - cron: '0 0 * * 0' # Runs every Sunday at Midnight UTC
+  workflow_dispatch:      # Allows manual run via button
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write     # Critical for pushing the JSON back
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip' # <--- NEW: Caches dependencies to speed up runs
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run Analysis Script
         env:
+          # These must match the names in your GitHub Secrets
           GOOGLE_SHEETS_CREDENTIALS_JSON: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS_JSON }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python process_data.py
 
       - name: Commit and push Data
         run: |
-          git config --global user.name 'Github-actions'
-          git config --global user.email 'actions@github.com'
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
           git add dashboard_data.json
+          # The "|| echo" prevents failure if data hasn't changed
           git commit -m 'Weekly Data Update' || echo "No changes to commit"
           git push
