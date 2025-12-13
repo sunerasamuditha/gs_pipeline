@@ -32,6 +32,7 @@ def fetch_data():
     client = gspread.authorize(creds)
     spreadsheet = client.open(SHEET_NAME)
     
+    # Try to open 'Form responses 1', fallback to first sheet if not found
     try:
         sheet = spreadsheet.worksheet("Form responses 1")
     except gspread.exceptions.WorksheetNotFound:
@@ -57,10 +58,13 @@ def fetch_data():
     else:
         live_data = pd.DataFrame()
 
+    # --- ENCODING FIX FOR CSV ---
+    # Using 'utf-8-sig' handles the BOM (Byte Order Mark) often added by Excel
+    # This prevents the first column from being corrupted (e.g. \ufeffTimestamp)
     try:
-        historical_data = pd.read_csv(CSV_PATH, encoding='utf-8')
-    except UnicodeDecodeError:
-        print("Warning: CSV not UTF-8, trying Latin-1...")
+        historical_data = pd.read_csv(CSV_PATH, encoding='utf-8-sig')
+    except Exception as e:
+        print(f"Warning: CSV read failed with utf-8-sig, trying latin1 fallback. Error: {e}")
         historical_data = pd.read_csv(CSV_PATH, encoding='latin1')
 
     combined_df = pd.concat([historical_data, live_data], ignore_index=True)
@@ -72,11 +76,14 @@ def clean_data(df):
     # 1. Standardize Dates
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
 
-    # 2. Text Normalization (Critical for Reports & Search)
+    # 2. Text Normalization
     # Converts "GALLE", "galle ", "Galle" -> "Galle"
+    # Note: We cast to string first to handle non-string types safely
     text_columns = ['District', 'Name of the School ', 'Medium', 'Type of Seminar']
     for col in text_columns:
         if col in df.columns:
+            # We treat everything as string, strip whitespace, and title case
+            # Title case generally works okay for Sinhala/Tamil (no-op), but cleans English
             df[col] = df[col].astype(str).str.strip().str.title()
 
     # 3. Volunteer Parsing
@@ -102,7 +109,7 @@ def clean_data(df):
     print(f"Data cleaned. Rows remaining: {len(df)}")
     return df
 
-# --- REPORT GENERATOR EXPORT ---
+# --- REPORT GENERATOR EXPORT (UPDATED) ---
 def export_report_data(df):
     print("Exporting data for Report Generator...")
     
@@ -122,9 +129,9 @@ def export_report_data(df):
     if 'clean_volunteers' in df.columns:
         report_df['Volunteers'] = df['clean_volunteers'].apply(lambda x: ", ".join(x) if isinstance(x, list) else str(x))
     
-    # Save to JSON
-    with open('reports_data.json', 'w') as f:
-        json.dump(report_df.to_dict(orient='records'), f, indent=4)
+    # --- FIX: UTF-8 ENCODING FOR REPORT JSON ---
+    with open('reports_data.json', 'w', encoding='utf-8') as f:
+        json.dump(report_df.to_dict(orient='records'), f, indent=4, ensure_ascii=False)
         
     print(f"Success! reports_data.json created with {len(report_df)} records.")
 
@@ -301,8 +308,9 @@ def main():
             "ai_remarks_insights": nlp_insights
         }
 
-        with open("dashboard_data.json", "w") as f:
-            json.dump(output, f, indent=4)
+        # --- FIX: UTF-8 ENCODING FOR DASHBOARD JSON ---
+        with open("dashboard_data.json", "w", encoding='utf-8') as f:
+            json.dump(output, f, indent=4, ensure_ascii=False)
         print("Success! dashboard_data.json created with 4 AI models.")
         
     except Exception as e:
