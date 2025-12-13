@@ -63,8 +63,9 @@ def fetch_data():
     return combined_df
 
 def clean_data(df):
-    print("Cleaning data...")
-    df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    print(f"Cleaning data... Initial count: {len(df)}")
+    # Assuming DD/MM/YYYY format based on typical regional usage
+    df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
 
     # Identify Volunteer Column safely
     volunteer_cols = [c for c in df.columns if 'Sasnaka Sansada member' in c]
@@ -86,6 +87,7 @@ def clean_data(df):
     student_col = 'Number of Students participated'
     df[student_col] = pd.to_numeric(df[student_col], errors='coerce').fillna(0)
     
+    print(f"Data cleaned. Rows remaining: {len(df)}")
     return df
 
 # --- AI MODEL 1: RESOURCE FORECASTER (XGBoost) ---
@@ -94,7 +96,12 @@ def run_resource_forecaster(df):
     try:
         # 1. Feature Engineering
         model_df = df.copy()
+        initial_count = len(model_df)
         model_df = model_df.dropna(subset=['Date', 'District'])
+        dropped_count = initial_count - len(model_df)
+        if dropped_count > 0:
+            print(f"  - Note: {dropped_count} rows dropped due to missing Date/District for forecasting.")
+        
         model_df['Month'] = model_df['Date'].dt.month
         # Exam Season in SL: May, August, December usually
         model_df['Is_Exam_Season'] = model_df['Month'].isin([5, 8, 12]).astype(int)
@@ -156,6 +163,7 @@ def run_volunteer_risk_model(df):
         # Explode volunteers to rows
         vol_data = []
         for _, row in df.iterrows():
+            if pd.isna(row['Date']): continue
             for vol in row['clean_volunteers']:
                 vol_data.append({'Name': vol, 'Date': row['Date']})
         
@@ -207,7 +215,11 @@ def run_demand_model(df):
         
         # Build Graph: School <-> Volunteer
         for _, row in df.iterrows():
-            school = str(row['Name of the School ']).strip() # Note the space in key if exists
+            school_raw = row.get('Name of the School ', '')
+            if pd.isna(school_raw) or str(school_raw).strip().lower() == 'nan' or str(school_raw).strip() == '':
+                continue
+                
+            school = str(school_raw).strip()
             G.add_node(school, type='school')
             
             for vol in row['clean_volunteers']:
