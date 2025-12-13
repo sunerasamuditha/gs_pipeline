@@ -1,42 +1,42 @@
 {
     "last_updated": "2025-12-13",
-    "total_seminars": 1668,
-    "total_students": 76961,
+    "total_seminars": 2197,
+    "total_students": 112708,
     "district_breakdown": {
-        "Matara": 218,
-        "Galle": 205,
-        "Colombo": 173,
-        "Gampaha": 143,
-        "Kalutara": 142,
-        "Anuradhapura": 90,
-        "Kurunegala\u2069": 69,
-        "Kandy": 67,
-        "Hambantota": 64,
-        "Kegalle": 60,
-        "Nuwara-Eliya": 52,
-        "Ratnapura": 50,
-        "Matale": 36,
+        "Matara": 273,
+        "Galle": 259,
+        "Colombo": 247,
+        "Kalutara": 217,
+        "Gampaha": 202,
+        "Anuradhapura": 156,
+        "Kurunegala\u2069": 115,
+        "Kandy": 112,
+        "Hambantota": 94,
+        "Kegalle": 84,
+        "Nuwara-Eliya": 71,
+        "Ratnapura": 64,
+        "Matale": 49,
+        "Polonnaruwa": 42,
+        "Badulla": 35,
+        "Puttlam": 34,
+        "Monaragala": 32,
         "Kurunegala": 31,
-        "Polonnaruwa": 29,
-        "Monaragala": 27,
-        "Badulla": 24,
-        "Puttlam": 14,
-        "Ampara": 12,
+        "Ampara": 30,
+        "Vavuniya": 11,
         "puttlam": 11,
-        "Vavuniya": 8,
+        "Trincomalee": 9,
         "ratnapura": 5,
+        "Kilinochchi": 5,
         "Jaffna": 3,
-        "Mannar": 2,
         "hambantota": 2,
-        "Kilinochchi": 2,
-        "Trincomalee": 2,
+        "Mannar": 2,
         "Batticaloa": 1,
         "Mulativu": 1
     },
     "ai_resource_forecast": {
         "Matara": {
-            "predicted_students": 56,
-            "paper_sheets_needed": 322
+            "predicted_students": 58,
+            "paper_sheets_needed": 333
         },
         "Galle": {
             "predicted_students": 33,
@@ -46,16 +46,40 @@
             "predicted_students": 45,
             "paper_sheets_needed": 258
         },
-        "Gampaha": {
-            "predicted_students": 45,
-            "paper_sheets_needed": 258
-        },
         "Kalutara": {
             "predicted_students": 61,
             "paper_sheets_needed": 350
+        },
+        "Gampaha": {
+            "predicted_students": 45,
+            "paper_sheets_needed": 258
         }
     },
     "ai_volunteer_risks": [
+        {
+            "name": "Induni lakshan",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2004-04-20"
+        },
+        {
+            "name": "Senura Maneth",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2004-04-20"
+        },
+        {
+            "name": "Sineth Dewpura",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2004-04-20"
+        },
+        {
+            "name": "Sithumin Prabashrawa",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2004-04-20"
+        },
         {
             "name": "Mindiya Jayasinghe",
             "risk_level": "High (Churn)",
@@ -69,75 +93,51 @@
             "last_active": "2004-12-17"
         },
         {
-            "name": "Madhwa kulathilake",
+            "name": "Dineshika de silva",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2024-01-23"
+            "last_active": "2005-06-10"
         },
         {
-            "name": "Charuki",
+            "name": "Isuru Jayakody",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "last_active": "2005-06-10"
         },
         {
-            "name": "Ishani",
+            "name": "Nethmi Tharushika",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "last_active": "2005-06-10"
         },
         {
-            "name": "Madhawa",
+            "name": "Theekshana Lakshan.",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
-        },
-        {
-            "name": "Malith",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
-        },
-        {
-            "name": "Nethmini Rosika",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
-        },
-        {
-            "name": "Anjana Kisal",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-27"
-        },
-        {
-            "name": "Gayanjala Rathnayake",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-04-11"
+            "last_active": "2005-06-10"
         }
     ],
     "ai_demand_predictions": [
         {
             "school": "MR/Thalahitiyagoda Parakrama Maha Vidyalaya",
-            "demand_score": 11.95
+            "demand_score": 8.73
         },
         {
             "school": "MR/Pagnalankara Kanitu Vidyalaya",
-            "demand_score": 10.92
+            "demand_score": 7.93
         },
         {
             "school": "MR/Gombaddala Vijayabha Kanitu Vidyalaya",
-            "demand_score": 9.63
+            "demand_score": 6.98
         },
         {
             "school": "MR/Meepawita Kanitu Vidyalaya",
-            "demand_score": 9.56
+            "demand_score": 6.93
         },
         {
             "school": "MR/Diddenipotha Maha Vidyalaya",
-            "demand_score": 9.17
+            "demand_score": 6.65
         }
     ],
-    "ai_remarks_insights": "Here are 3 bullet points on key operational issues or praise derived from the seminar remarks:\n\n*   **Praise for Exceptional Cooperation and Support:** Multiple remarks highlight the **very cooperative nature of the children/students and excellent support from host schools**, which consistently contributed to a friendly atmosphere and the successful, problem-free completion of seminars.\n*   **Praise for Effective Execution and Quality Venues:** The seminars were consistently reported as **\"successfully completed without any problems\" and \"well done,\"** with some schools identified as \"one of the best,\" indicating strong organizational execution and positive experiences with host facilities.\n*   **Operational Issue: Supporting Schools in Challenging Locations:** A critical operational challenge is identified in **reaching and supporting schools located in \"isolated and difficult village[s],\"** which require dedicated and \"unwavering support\" for their development, implying potential logistical or resource-allocation considerations for future initiatives."
+    "ai_remarks_insights": "No insights available."
 }

@@ -30,9 +30,17 @@ def fetch_data():
         raise Exception("Google Sheets credentials not found.")
 
     client = gspread.authorize(creds)
-    sheet = client.open(SHEET_NAME).sheet1
+    spreadsheet = client.open(SHEET_NAME)
+    
+    # Try to open 'Form responses 1', fallback to first sheet if not found
+    try:
+        sheet = spreadsheet.worksheet("Form responses 1")
+    except gspread.exceptions.WorksheetNotFound:
+        print("Warning: 'Form responses 1' not found, using first sheet.")
+        sheet = spreadsheet.sheet1
     
     all_values = sheet.get_all_values()
+    
     if all_values:
         headers = all_values[0]
         seen = {}
