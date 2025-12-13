@@ -8,7 +8,7 @@ import google.generativeai as genai
 from datetime import datetime, timedelta
 import networkx as nx
 from xgboost import XGBRegressor
-from sklearn.model_selection import train_test_split
+import re
 
 # --- CONFIGURATION ---
 SHEET_NAME = "Ganitha Saviya National Program 2025/26 (Responses)"
@@ -32,7 +32,6 @@ def fetch_data():
     client = gspread.authorize(creds)
     spreadsheet = client.open(SHEET_NAME)
     
-    # Try to open 'Form responses 1', fallback to first sheet if not found
     try:
         sheet = spreadsheet.worksheet("Form responses 1")
     except gspread.exceptions.WorksheetNotFound:
@@ -58,9 +57,8 @@ def fetch_data():
     else:
         live_data = pd.DataFrame()
 
-    # --- ENCODING FIX FOR CSV ---
-    # Using 'utf-8-sig' handles the BOM (Byte Order Mark) often added by Excel
-    # This prevents the first column from being corrupted (e.g. \ufeffTimestamp)
+    # Try UTF-8 first, fallback to Latin-1 only if necessary
+    # Note: The fallback is often what creates the "Mojibake" (À¶½...) errors
     try:
         historical_data = pd.read_csv(CSV_PATH, encoding='utf-8-sig')
     except Exception as e:
@@ -70,21 +68,62 @@ def fetch_data():
     combined_df = pd.concat([historical_data, live_data], ignore_index=True)
     return combined_df
 
+def remove_corrupted_rows(df):
+    """
+    Detects and removes rows containing encoding errors (Mojibake).
+    Pattern: Characters in Latin-1 Supplement range (0x80-0xFF) 
+    which appear when UTF-8 (Sinhala/Tamil) is misread as Latin-1.
+    """
+    initial_count = len(df)
+    
+    # Columns to check for corruption
+    check_cols = ['Name of the School ', 'District', 'Type of Seminar', 'Medium']
+    # Only check columns that actually exist
+    check_cols = [c for c in check_cols if c in df.columns]
+
+    def is_corrupted(text):
+        if not isinstance(text, str): return False
+        
+        # 1. Normalize: Replace Non-Breaking Space (\u00A0) with normal space 
+        # (NBSP is valid, we don't want to delete rows because of it)
+        text = text.replace('\u00A0', ' ')
+        
+        # 2. Check for Replacement Character ()
+        if '\ufffd' in text: return True
+        
+        # 3. Check for Mojibake Pattern (High-ASCII junk like À, ¶, ½)
+        # Sinhala/Tamil are > 0x0800, so they won't trigger this.
+        # English is < 0x0080. 
+        # This range (0x80 - 0xFF) captures the specific corruption you saw.
+        if re.search(r'[\u0080-\u00FF]', text):
+            return True
+        return False
+
+    # Apply filter
+    mask = df[check_cols].applymap(is_corrupted).any(axis=1)
+    df_clean = df[~mask].copy()
+    
+    dropped_count = initial_count - len(df_clean)
+    if dropped_count > 0:
+        print(f"⚠️ Removed {dropped_count} rows containing encoding errors (Mojibake).")
+        
+    return df_clean
+
 def clean_data(df):
     print(f"Cleaning data... Initial count: {len(df)}")
+    
+    # 0. PRE-CLEAN: Remove corrupted encoding rows
+    df = remove_corrupted_rows(df)
     
     # 1. Standardize Dates
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
 
     # 2. Text Normalization
-    # Converts "GALLE", "galle ", "Galle" -> "Galle"
-    # Note: We cast to string first to handle non-string types safely
     text_columns = ['District', 'Name of the School ', 'Medium', 'Type of Seminar']
     for col in text_columns:
         if col in df.columns:
-            # We treat everything as string, strip whitespace, and title case
-            # Title case generally works okay for Sinhala/Tamil (no-op), but cleans English
-            df[col] = df[col].astype(str).str.strip().str.title()
+            # Strip, Title Case, and remove accidental non-breaking spaces
+            df[col] = df[col].astype(str).str.strip().str.replace('\u00A0', ' ').str.title()
 
     # 3. Volunteer Parsing
     volunteer_cols = [c for c in df.columns if 'Sasnaka Sansada member' in c]
@@ -109,11 +148,11 @@ def clean_data(df):
     print(f"Data cleaned. Rows remaining: {len(df)}")
     return df
 
-# --- REPORT GENERATOR EXPORT (UPDATED) ---
+# --- REPORT GENERATOR EXPORT ---
 def export_report_data(df):
     print("Exporting data for Report Generator...")
     
-    # Select safe, public columns for the website
+    # Select safe, public columns
     safe_columns = [
         'Date', 'District', 'Name of the School ', 'Type of Seminar', 
         'Medium', 'Number of Students participated'
@@ -122,20 +161,18 @@ def export_report_data(df):
     existing_cols = [c for c in safe_columns if c in df.columns]
     report_df = df[existing_cols].copy()
     
-    # Format Date for JSON (String YYYY-MM-DD)
     report_df['Date'] = report_df['Date'].dt.strftime('%Y-%m-%d')
     
-    # Join Volunteers into a single string for PDF Table
     if 'clean_volunteers' in df.columns:
         report_df['Volunteers'] = df['clean_volunteers'].apply(lambda x: ", ".join(x) if isinstance(x, list) else str(x))
     
-    # --- FIX: UTF-8 ENCODING FOR REPORT JSON ---
+    # Force UTF-8 encoding to prevent new errors
     with open('reports_data.json', 'w', encoding='utf-8') as f:
         json.dump(report_df.to_dict(orient='records'), f, indent=4, ensure_ascii=False)
         
     print(f"Success! reports_data.json created with {len(report_df)} records.")
 
-# --- AI MODEL 1: RESOURCE FORECASTER (XGBoost) ---
+# --- AI MODEL 1: RESOURCE FORECASTER ---
 def run_resource_forecaster(df):
     print("Running AI Model 1: Resource Forecaster...")
     try:
@@ -154,7 +191,6 @@ def run_resource_forecaster(df):
         model = XGBRegressor(n_estimators=100, objective='reg:squarederror', random_state=42)
         model.fit(X, y)
 
-        # Predict Next Month
         next_month = (datetime.now() + timedelta(days=30)).month
         is_exam = 1 if next_month in [5, 8, 12] else 0
         
@@ -200,7 +236,6 @@ def run_volunteer_risk_model(df):
             group = group.sort_values('Date')
             last_active = group['Date'].max()
             days_inactive = (current_date - last_active).days
-            
             recent_events = group[group['Date'] > (current_date - timedelta(days=30))]
             risk_level = "Low"
             reason = ""
@@ -265,9 +300,8 @@ def run_remarks_analysis(df):
 
     remarks_series = df[remarks_col].dropna().astype(str)
     remarks_series = remarks_series[remarks_series.str.len() > 5]
-    all_remarks = remarks_series.tolist() # Analyze all valid remarks
+    all_remarks = remarks_series.tolist()
     
-    # Limit to last 50 to avoid token limits if list is huge
     if len(all_remarks) > 50: all_remarks = all_remarks[-50:]
 
     insights_text = "No insights available."
@@ -288,10 +322,8 @@ def main():
         df = fetch_data()
         df = clean_data(df)
 
-        # 1. Export Report Data (New Feature)
         export_report_data(df)
 
-        # 2. Run AI Engines
         resource_forecast = run_resource_forecaster(df)
         volunteer_risks = run_volunteer_risk_model(df)
         demand_predictions = run_demand_model(df)
@@ -308,7 +340,6 @@ def main():
             "ai_remarks_insights": nlp_insights
         }
 
-        # --- FIX: UTF-8 ENCODING FOR DASHBOARD JSON ---
         with open("dashboard_data.json", "w", encoding='utf-8') as f:
             json.dump(output, f, indent=4, ensure_ascii=False)
         print("Success! dashboard_data.json created with 4 AI models.")
