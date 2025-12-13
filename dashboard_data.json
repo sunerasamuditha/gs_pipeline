@@ -1,11 +1,11 @@
 {
     "last_updated": "2025-12-13",
-    "total_seminars": 2198,
-    "total_students": 112714,
+    "total_seminars": 2197,
+    "total_students": 112708,
     "district_breakdown": {
         "Matara": 273,
         "Galle": 259,
-        "Colombo": 248,
+        "Colombo": 247,
         "Kalutara": 217,
         "Gampaha": 202,
         "Anuradhapura": 156,
@@ -44,8 +44,8 @@
             "paper_sheets_needed": 189
         },
         "Colombo": {
-            "predicted_students": 46,
-            "paper_sheets_needed": 264
+            "predicted_students": 45,
+            "paper_sheets_needed": 258
         },
         "Kalutara": {
             "predicted_students": 61,
@@ -137,8 +137,8 @@
         },
         {
             "school": "MR/Diddenipotha Maha Vidyalaya",
-            "demand_score": 6.64
+            "demand_score": 6.65
         }
     ],
-    "ai_remarks_insights": "No insights available."
+    "ai_remarks_insights": "Here are 10 bullet points analyzing the seminar remarks, covering key operational issues and praise:\n\n1.  **Overwhelming School Support and Appreciation:** Schools, principals, and teachers consistently provided strong support, expressed high appreciation for the program and presenters, and often personally thanked the organizers, frequently requesting future seminars. This indicates successful stakeholder relationships and high perceived value.\n2.  **High Student Engagement and Positive Impact on Learning:** Students were widely reported as highly engaged, enjoying interactive sessions, finding problems relatable, and showing noticeable improvements in problem-solving confidence. The motivational aspects were particularly effective in inspiring weaker students and boosting overall morale.\n3.  **Effective Pedagogical Approach and Relevant Content:** The seminars were praised for clear explanations, practical examples, use of real-life scenarios, provision of printed worksheets, and interactive quizzes. Content was well-aligned with the O/L syllabus and exam requirements, making difficult topics accessible and providing useful revision tips.\n4.  **Frequent Demand for Future and Expanded Programs:** There is widespread and explicit demand for more seminars, including specific requests for Science, English, \"RTP\" (Revision, Theory, Paper?) seminars, \"Paper Seminars,\" and \"Maths Camps,\" often as follow-up or additional sessions, indicating strong satisfaction and a desire for continued partnership.\n5.  **Presenter Professionalism and Quality:** Facilitators and presenters received high praise for their professionalism, knowledge, excellent delivery, punctuality, and respectful, patient attitudes. They were effective in keeping students engaged and handling diverse skill levels, contributing significantly to the seminar's success.\n6.  **Operational Failure: Seminar Cancellations/Shortenings Due to Management & External Factors:** At least two instances highlight significant operational issues: one seminar's second day was canceled due to a \"management error,\" and another was cut short because of \"flood receded\" or school's inability to grant a second day due to syllabus constraints, indicating potential planning or flexibility challenges.\n7.  **Significant Academic Gaps and Resource Needs in Disadvantaged Schools:** Numerous remarks shed light on schools in \"poor,\" \"rural,\" or \"difficult\" areas where students lacked basic mathematical fundamentals, had missed primary education, or achieved very low marks (e.g., \"below 35/50\"). There were also requests for basic teaching materials and even financial support, underscoring profound educational needs.\n8.  **Student Discipline and Volunteer Safety Concerns:** A critical operational issue was raised concerning \"very disobedient\" students in one school, with the explicit suggestion for \"only male volunteers\" in future collaborations, indicating a serious challenge in student behavior management and potential safety concerns for volunteers.\n9.  **Minor Internal Coordination and Logistical Issues:** While generally successful, some feedback noted \"little coordination errors\" within the organizing team (\"GS team had some downs\") and logistical constraints such as \"limited infrastructure,\" \"not enough teachers\" in some schools, or lower student attendance in specific instances.\n10. **Successful Collaboration and Outreach Model:** The program demonstrated a strong capacity for collaboration, partnering with entities like the Sarvodaya Foundation, other schools in clusters (e.g., Berannawa, Handessa), and even university students (Rajarata University), effectively extending its reach to diverse and often underserved O/L student populations across different districts."
 }
