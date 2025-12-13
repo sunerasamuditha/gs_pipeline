@@ -258,7 +258,7 @@ def run_remarks_analysis(df):
     # Filter for non-empty string remarks
     remarks_series = df[remarks_col].dropna().astype(str)
     remarks_series = remarks_series[remarks_series.str.len() > 5] # Filter short junk
-    recent_remarks = remarks_series.tail(20).tolist()
+    recent_remarks = remarks_series.tail(100).tolist()
 
     insights_text = "No insights available."
     
