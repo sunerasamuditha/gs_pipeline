@@ -194,12 +194,24 @@ def run_resource_forecaster(df):
         print(f"Resource Forecaster Error: {e}")
         return {}
 
-# --- AI MODEL 2: VOLUNTEER RISK (FORCED DISTRIBUTION) ---
+# --- AI MODEL 2: VOLUNTEER RISK (RECENT ACTIVITY FOCUS) ---
 def run_volunteer_risk_model(df):
-    print("Running AI Model 2: Volunteer Risk (Distribution Enforced)...")
+    print("Running AI Model 2: Volunteer Risk (90-Day Window)...")
     try:
+        # 1. Filter Data to Last 90 Days ONLY
+        # This ensures we ignore "Ghosts" who left long ago
+        current_date = datetime.now()
+        start_date = current_date - timedelta(days=90)
+        
+        recent_df = df[df['Date'] >= start_date].copy()
+        
+        if recent_df.empty:
+            print("No data in the last 90 days.")
+            return []
+
+        # 2. Explode volunteers from the filtered dataset
         vol_data = []
-        for _, row in df.iterrows():
+        for _, row in recent_df.iterrows():
             if pd.isna(row['Date']): continue
             for vol in row['clean_volunteers']:
                 vol_data.append({'Name': vol, 'Date': row['Date']})
@@ -207,69 +219,44 @@ def run_volunteer_risk_model(df):
         v_df = pd.DataFrame(vol_data)
         if v_df.empty: return []
 
-        current_date = datetime.now()
-        
-        # 1. Identify the Pool (Anyone inactive > 30 days)
-        # We process everyone first to find the pool
-        risk_pool = []
-        
+        risky_volunteers = []
+
+        # 3. Analyze Inactivity within this window
         for name, group in v_df.groupby('Name'):
-            group = group.sort_values('Date')
             last_active = group['Date'].max()
             days_inactive = (current_date - last_active).days
             
-            # Check for Burnout independent of inactivity
-            recent_events = group[group['Date'] > (current_date - timedelta(days=100))]
-            if len(recent_events) >= 4:
-                # Burnout is separate, keep it as is
-                pass 
+            risk_level = "Safe"
+            color = "green"
+            reason = ""
 
-            # We only care about the inactive pool for the distribution logic
-            if days_inactive > 500:
-                risk_pool.append({
+            # New Logic: 30 / 50 / 70 Thresholds
+            if days_inactive > 70:
+                risk_level = "Critical"
+                color = "red"
+                reason = "Inactive > 70 Days (Immediate Action)"
+            elif days_inactive > 50:
+                risk_level = "High"
+                color = "orange"
+                reason = "Inactive > 50 Days"
+            elif days_inactive > 30:
+                risk_level = "Moderate"
+                color = "yellow"
+                reason = "Inactive > 30 Days"
+            
+            # We only return people who are actually at risk (Inactive > 30)
+            if risk_level != "Safe":
+                risky_volunteers.append({
                     "name": name,
+                    "risk_level": risk_level,
+                    "color": color,
+                    "reason": reason,
                     "last_active": last_active.strftime('%Y-%m-%d'),
                     "days_inactive": days_inactive
                 })
 
-        # 2. Sort Pool by Inactivity (Descending) - Worst offenders first
-        risk_pool = sorted(risk_pool, key=lambda x: x['days_inactive'], reverse=True)
-        total_risks = len(risk_pool)
-        
-        if total_risks == 0: return []
-
-        # 3. Apply Forced Distribution (The Cheat)
-        # 30% Red (>90), 50% Orange (>60), 20% Yellow (>30)
-        idx_red_end = math.ceil(total_risks * 0.30)
-        idx_orange_end = idx_red_end + math.ceil(total_risks * 0.50)
-        
-        final_risks = []
-        
-        for i, volunteer in enumerate(risk_pool):
-            if i < idx_red_end:
-                risk_level = "Critical"
-                color = "red"
-                reason = "Inactive > 90 Days" # Forced Label
-            elif i < idx_orange_end:
-                risk_level = "High"
-                color = "orange"
-                reason = "Inactive > 60 Days" # Forced Label
-            else:
-                risk_level = "Moderate"
-                color = "yellow"
-                reason = "Inactive > 30 Days" # Forced Label
-                
-            final_risks.append({
-                "name": volunteer['name'],
-                "risk_level": risk_level,
-                "color": color,
-                "reason": reason,
-                "last_active": volunteer['last_active'],
-                "days_inactive": volunteer['days_inactive']
-            })
-            
-        # Return all classified risks
-        return final_risks
+        # Sort by most critical (highest inactivity)
+        return sorted(risky_volunteers, key=lambda x: x['days_inactive'], reverse=True)
 
     except Exception as e:
         print(f"Volunteer Risk Error: {e}")
