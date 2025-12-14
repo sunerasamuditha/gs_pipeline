@@ -194,12 +194,11 @@ def run_resource_forecaster(df):
         print(f"Resource Forecaster Error: {e}")
         return {}
 
-# --- AI MODEL 2: VOLUNTEER RISK (RECENT ACTIVITY FOCUS) ---
+# --- AI MODEL 2: VOLUNTEER RISK (TIERED LIMITS) ---
 def run_volunteer_risk_model(df):
-    print("Running AI Model 2: Volunteer Risk (90-Day Window)...")
+    print("Running AI Model 2: Volunteer Risk (Tiered Limits)...")
     try:
         # 1. Filter Data to Last 90 Days ONLY
-        # This ensures we ignore "Ghosts" who left long ago
         current_date = datetime.now()
         start_date = current_date - timedelta(days=90)
         
@@ -209,7 +208,7 @@ def run_volunteer_risk_model(df):
             print("No data in the last 90 days.")
             return []
 
-        # 2. Explode volunteers from the filtered dataset
+        # 2. Explode volunteers
         vol_data = []
         for _, row in recent_df.iterrows():
             if pd.isna(row['Date']): continue
@@ -219,44 +218,58 @@ def run_volunteer_risk_model(df):
         v_df = pd.DataFrame(vol_data)
         if v_df.empty: return []
 
-        risky_volunteers = []
+        # 3. Categorize into Buckets
+        bucket_critical = [] # > 70 Days
+        bucket_high = []     # > 50 Days
+        bucket_moderate = [] # > 30 Days
 
-        # 3. Analyze Inactivity within this window
         for name, group in v_df.groupby('Name'):
             last_active = group['Date'].max()
             days_inactive = (current_date - last_active).days
             
-            risk_level = "Safe"
-            color = "green"
-            reason = ""
+            # Base Object
+            volunteer_obj = {
+                "name": name,
+                "last_active": last_active.strftime('%Y-%m-%d'),
+                "days_inactive": days_inactive
+            }
 
-            # New Logic: 30 / 50 / 70 Thresholds
+            # Bucket Logic
             if days_inactive > 70:
-                risk_level = "Critical"
-                color = "red"
-                reason = "Inactive > 70 Days (Immediate Action)"
-            elif days_inactive > 50:
-                risk_level = "High"
-                color = "orange"
-                reason = "Inactive > 50 Days"
-            elif days_inactive > 30:
-                risk_level = "Moderate"
-                color = "yellow"
-                reason = "Inactive > 30 Days"
-            
-            # We only return people who are actually at risk (Inactive > 30)
-            if risk_level != "Safe":
-                risky_volunteers.append({
-                    "name": name,
-                    "risk_level": risk_level,
-                    "color": color,
-                    "reason": reason,
-                    "last_active": last_active.strftime('%Y-%m-%d'),
-                    "days_inactive": days_inactive
+                volunteer_obj.update({
+                    "risk_level": "Critical",
+                    "color": "red",
+                    "reason": "Inactive > 70 Days"
                 })
+                bucket_critical.append(volunteer_obj)
+                
+            elif days_inactive > 50:
+                volunteer_obj.update({
+                    "risk_level": "High",
+                    "color": "orange",
+                    "reason": "Inactive > 50 Days"
+                })
+                bucket_high.append(volunteer_obj)
+                
+            elif days_inactive > 30:
+                volunteer_obj.update({
+                    "risk_level": "Moderate",
+                    "color": "yellow",
+                    "reason": "Inactive > 30 Days"
+                })
+                bucket_moderate.append(volunteer_obj)
 
-        # Sort by most critical (highest inactivity)
-        return sorted(risky_volunteers, key=lambda x: x['days_inactive'], reverse=True)
+        # 4. Sort and Slice Top 10 per Bucket
+        # Sort by days_inactive descending (worst first)
+        bucket_critical = sorted(bucket_critical, key=lambda x: x['days_inactive'], reverse=True)[:10]
+        bucket_high = sorted(bucket_high, key=lambda x: x['days_inactive'], reverse=True)[:10]
+        bucket_moderate = sorted(bucket_moderate, key=lambda x: x['days_inactive'], reverse=True)[:10]
+
+        # 5. Combine (Critical first)
+        final_list = bucket_critical + bucket_high + bucket_moderate
+        
+        print(f"Risk Model: Found {len(final_list)} risks ({len(bucket_critical)} Red, {len(bucket_high)} Orange, {len(bucket_moderate)} Yellow)")
+        return final_list
 
     except Exception as e:
         print(f"Volunteer Risk Error: {e}")
