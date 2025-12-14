@@ -219,7 +219,7 @@ def run_volunteer_risk_model(df):
             days_inactive = (current_date - last_active).days
             
             # Check for Burnout independent of inactivity
-            recent_events = group[group['Date'] > (current_date - timedelta(days=30))]
+            recent_events = group[group['Date'] > (current_date - timedelta(days=90))]
             if len(recent_events) >= 4:
                 # Burnout is separate, keep it as is
                 pass 
@@ -299,8 +299,8 @@ def run_demand_model(df):
             score = np.mean([centrality[n] for n in neighbors]) * 1000 
             predictions.append({"school": school, "demand_score": round(score, 2)})
             
-        # Filter: Show all schools with score >= 1.0 (Threshold based)
-        filtered_predictions = [p for p in predictions if p['demand_score'] >= 1.0]
+        # Filter: Show all schools with score >= 3.0 (Threshold based)
+        filtered_predictions = [p for p in predictions if p['demand_score'] >= 3.0]
         
         return sorted(filtered_predictions, key=lambda x: x['demand_score'], reverse=True)
     except Exception as e:
