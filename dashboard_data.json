@@ -1,32 +1,31 @@
 {
     "last_updated": "2025-12-14",
-    "total_seminars": 2197,
-    "total_students": 112708,
+    "total_seminars": 2096,
+    "total_students": 107894,
     "district_breakdown": {
         "Matara": 273,
         "Galle": 259,
-        "Colombo": 247,
-        "Kalutara": 217,
+        "Colombo": 240,
+        "Kalutara": 216,
         "Gampaha": 202,
         "Anuradhapura": 156,
-        "Kandy": 112,
+        "Kandy": 107,
         "Hambantota": 96,
-        "Kegalle": 84,
+        "Kegalle": 78,
         "Nuwara-Eliya": 71,
         "Ratnapura": 69,
-        "Kurunegalaâ©": 69,
         "Matale": 49,
         "Kurunegala⁩": 46,
         "Puttlam": 45,
         "Polonnaruwa": 42,
-        "Badulla": 35,
-        "Monaragala": 32,
-        "Kurunegala": 31,
+        "Badulla": 34,
+        "Monaragala": 31,
         "Ampara": 30,
+        "Kurunegala": 22,
         "Vavuniya": 11,
         "Trincomalee": 9,
-        "Kilinochchi": 5,
         "Jaffna": 3,
+        "Kilinochchi": 3,
         "Mannar": 2,
         "Batticaloa": 1,
         "Mulativu": 1
@@ -45,8 +44,8 @@
             "paper_sheets_needed": 258
         },
         "Kalutara": {
-            "predicted_students": 61,
-            "paper_sheets_needed": 350
+            "predicted_students": 62,
+            "paper_sheets_needed": 356
         },
         "Gampaha": {
             "predicted_students": 45,
@@ -55,87 +54,87 @@
     },
     "ai_volunteer_risks": [
         {
+            "name": "Madhwa kulathilake",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2024-01-23"
+        },
+        {
+            "name": "Charuki",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2024-02-12"
+        },
+        {
+            "name": "Ishani",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2024-02-12"
+        },
+        {
+            "name": "Madhawa",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2024-02-12"
+        },
+        {
+            "name": "Malith",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2024-02-12"
+        },
+        {
+            "name": "Nethmini Rosika",
+            "risk_level": "High (Churn)",
+            "reason": "Inactive for >90 days",
+            "last_active": "2024-02-12"
+        },
+        {
             "name": "Induni lakshan",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2004-04-20"
+            "last_active": "2024-04-20"
         },
         {
             "name": "Senura Maneth",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2004-04-20"
+            "last_active": "2024-04-20"
         },
         {
             "name": "Sineth Dewpura",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2004-04-20"
+            "last_active": "2024-04-20"
         },
         {
             "name": "Sithumin Prabashrawa",
             "risk_level": "High (Churn)",
             "reason": "Inactive for >90 days",
-            "last_active": "2004-04-20"
-        },
-        {
-            "name": "Mindiya Jayasinghe",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2004-12-17"
-        },
-        {
-            "name": "Thinal Thilakarathne",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2004-12-17"
-        },
-        {
-            "name": "Dineshika de silva",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2005-06-10"
-        },
-        {
-            "name": "Isuru Jayakody",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2005-06-10"
-        },
-        {
-            "name": "Nethmi Tharushika",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2005-06-10"
-        },
-        {
-            "name": "Theekshana Lakshan.",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2005-06-10"
+            "last_active": "2024-04-20"
         }
     ],
     "ai_demand_predictions": [
         {
             "school": "Mr/Thalahitiyagoda Parakrama Maha Vidyalaya",
-            "demand_score": 8.78
+            "demand_score": 9.2
         },
         {
             "school": "Mr/Pagnalankara Kanitu Vidyalaya",
-            "demand_score": 7.97
+            "demand_score": 8.35
         },
         {
             "school": "Mr/Gombaddala Vijayabha Kanitu Vidyalaya",
-            "demand_score": 7.02
+            "demand_score": 7.36
         },
         {
             "school": "Mr/Meepawita Kanitu Vidyalaya",
-            "demand_score": 6.97
+            "demand_score": 7.31
         },
         {
             "school": "Mr/Diddenipotha Maha Vidyalaya",
-            "demand_score": 6.68
+            "demand_score": 7.0
         }
     ],
-    "ai_remarks_insights": "Here are 10 bullet points analyzing the seminar remarks, covering key operational issues and praise:\n\n**Praise/Successes:**\n\n1.  **Overwhelming School Support:** There was consistent and enthusiastic praise for the support received from school principals, teachers, and even parents, who were described as \"very supportive\" and appreciative.\n2.  **Positive Feedback & Perceived Value:** The seminars consistently received \"good\" and \"positive feedbacks\" from both the school staff and students, indicating high satisfaction and perceived value of the programs.\n3.  **High Student Engagement:** Students were frequently noted for their active participation, hard work, and enthusiastic engagement, suggesting the content and delivery resonated well with them.\n4.  **Successful Execution & Good Conduct:** The seminars were generally described as \"well conducted,\" \"successfully held,\" and \"nicely done,\" highlighting the organizational team's effectiveness in program delivery.\n5.  **Impact in Challenging Environments:** The seminars had a significant positive impact on schools facing difficulties, including those with \"less facilities\" or at risk of closure, demonstrating the program's crucial role in supporting education.\n\n**Operational Issues/Opportunities:**\n\n6.  **Internal Team Performance Issues:** One critical comment explicitly identified \"downs\" within the internal \"GS team,\" indicating a need for improved performance and preparation for future events.\n7.  **Resource Gap in Teaching Staff:** A significant operational issue was the absence of subject-specific teachers (e.g., Maths teachers), leading to non-specialist staff having to teach, which could impact educational quality.\n8.  **Student Discipline/Manners:** While students were hardworking, one remark noted a \"lack of manners,\" suggesting a potential area for incorporating behavioral management or expectations into future interactions.\n9.  **Time Constraints and Demand for Follow-up:** Several remarks highlighted having \"only one day\" for the seminar, coupled with a strong desire and commitment from both organizers and schools to conduct follow-up programs (e.g., \"another seminar,\" \"paper seminar\"), indicating high demand and a need for longer engagement.\n10. **Logistical Complexity & Intensive Scheduling:** The mentions of \"seminar cluster,\" \"2 days night seminar from 8am to midnight,\" and \"night camp\" point to complex and intensive scheduling demands, requiring robust logistical planning and team stamina."
+    "ai_remarks_insights": "Here are 10 bullet points on key operational issues or praise derived from the seminar remarks:\n\n**Praise:**\n\n*   **Exceptional School and Stakeholder Support:** The host school, including the Principal, teachers, staff, and even students and parents, demonstrated very strong and often \"full support\" for the seminar, making organizers \"feel free to continue our program.\"\n*   **Overwhelmingly Positive Feedback and Success:** The seminar consistently received \"good feedback\" and \"positive feedbacks\" from participants, children, and teachers, leading to declarations of a \"successful seminar\" and it being \"very good.\"\n*   **Strong Student Engagement and Participation:** Students were described as \"nice\" and \"enthusiastically participated,\" working hard during the program.\n*   **Dedicated and Inspiring Teacher/Principal Efforts:** The principal and teachers were highlighted not just for their support but also for their dedication, efforts, and ability to \"inspire and motivate\" the organizers, especially in schools with \"less facilities.\"\n*   **Organizer's Commitment and Intensive Program Format:** The organizing team put in \"maximum\" effort, even conducting an intensive \"2 days night seminar from 8am to midnight\" including a \"night camp,\" indicating a high level of commitment.\n\n**Operational Issues:**\n\n*   **Internal Team (GS Team) Performance Gaps:** There were explicit mentions of \"downs\" and \"disappointment\" within the organizing \"GS team,\" with a clear directive for them to \"do better than this next time,\" suggesting internal coordination or execution challenges.\n*   **Lack of Subject-Specific Teachers at Host School:** A significant contextual issue was the absence of Maths teachers, requiring the subject to be taught by a teacher of a different subject, which could impact the specialized content delivery.\n*   **Limited Seminar Duration/Time Constraint:** Organizers noted they \"only got one day\" for the seminar, indicating a desire for more time or a limitation on what could be covered within the allocated period.\n*   **Student Discipline/Manners:** While students were engaged, one remark specifically noted a \"lack of manners,\" suggesting potential challenges in participant management or behavioral expectations.\n*   **High Demand for Future Programs:** While a positive outcome, the consistent request and belief from the school that organizers \"will do another programme like this,\" coupled with the organizers' own hopes \"to do another seminar\" or \"a paper seminar,\" points to an operational demand for sustained engagement and follow-up activities."
 }
