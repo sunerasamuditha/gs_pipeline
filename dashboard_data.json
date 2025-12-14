@@ -31,87 +31,297 @@
         "Mulativu": 1
     },
     "ai_resource_forecast": {
-        "Matara": {
-            "predicted_students": 57,
-            "paper_sheets_needed": 327
-        },
-        "Galle": {
-            "predicted_students": 33,
-            "paper_sheets_needed": 189
+        "Ampara": {
+            "predicted_students": 110,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 126
         },
         "Colombo": {
-            "predicted_students": 45,
-            "paper_sheets_needed": 258
+            "predicted_students": 990,
+            "estimated_seminars": 22,
+            "paper_sheets_needed": 1138
         },
         "Kalutara": {
-            "predicted_students": 62,
-            "paper_sheets_needed": 356
+            "predicted_students": 682,
+            "estimated_seminars": 11,
+            "paper_sheets_needed": 784
+        },
+        "Galle": {
+            "predicted_students": 891,
+            "estimated_seminars": 27,
+            "paper_sheets_needed": 1024
+        },
+        "Nuwara-Eliya": {
+            "predicted_students": 406,
+            "estimated_seminars": 7,
+            "paper_sheets_needed": 466
+        },
+        "Polonnaruwa": {
+            "predicted_students": 49,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 56
+        },
+        "Hambantota": {
+            "predicted_students": 760,
+            "estimated_seminars": 5,
+            "paper_sheets_needed": 873
+        },
+        "Monaragala": {
+            "predicted_students": 232,
+            "estimated_seminars": 2,
+            "paper_sheets_needed": 266
+        },
+        "Ratnapura": {
+            "predicted_students": 515,
+            "estimated_seminars": 5,
+            "paper_sheets_needed": 592
         },
         "Gampaha": {
+            "predicted_students": 495,
+            "estimated_seminars": 11,
+            "paper_sheets_needed": 569
+        },
+        "Matale": {
+            "predicted_students": 488,
+            "estimated_seminars": 8,
+            "paper_sheets_needed": 561
+        },
+        "Kurunegala": {
+            "predicted_students": 62,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 71
+        },
+        "Anuradhapura": {
+            "predicted_students": 610,
+            "estimated_seminars": 5,
+            "paper_sheets_needed": 701
+        },
+        "Puttlam": {
+            "predicted_students": 54,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 62
+        },
+        "Matara": {
+            "predicted_students": 399,
+            "estimated_seminars": 7,
+            "paper_sheets_needed": 458
+        },
+        "Kandy": {
+            "predicted_students": 1068,
+            "estimated_seminars": 12,
+            "paper_sheets_needed": 1228
+        },
+        "Vavuniya": {
+            "predicted_students": 67,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 77
+        },
+        "Kegalle": {
+            "predicted_students": 270,
+            "estimated_seminars": 5,
+            "paper_sheets_needed": 310
+        },
+        "Badulla": {
+            "predicted_students": 22,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 25
+        },
+        "Batticaloa": {
+            "predicted_students": 34,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 39
+        },
+        "Mannar": {
+            "predicted_students": 29,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 33
+        },
+        "Trincomalee": {
+            "predicted_students": 27,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 31
+        },
+        "Jaffna": {
+            "predicted_students": 0,
+            "estimated_seminars": 2,
+            "paper_sheets_needed": 0
+        },
+        "Mulativu": {
+            "predicted_students": 50,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 57
+        },
+        "Kilinochchi": {
+            "predicted_students": 27,
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 31
+        },
+        "Kurunegala⁩": {
             "predicted_students": 45,
-            "paper_sheets_needed": 258
+            "estimated_seminars": 1,
+            "paper_sheets_needed": 51
         }
     },
     "ai_volunteer_risks": [
         {
             "name": "Madhwa kulathilake",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-01-23"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-01-23",
+            "days_inactive": 691
         },
         {
             "name": "Charuki",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-02-12",
+            "days_inactive": 671
         },
         {
             "name": "Ishani",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-02-12",
+            "days_inactive": 671
         },
         {
             "name": "Madhawa",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-02-12",
+            "days_inactive": 671
         },
         {
             "name": "Malith",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-02-12",
+            "days_inactive": 671
         },
         {
             "name": "Nethmini Rosika",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-02-12"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-02-12",
+            "days_inactive": 671
         },
         {
             "name": "Induni lakshan",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-04-20"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-04-20",
+            "days_inactive": 603
         },
         {
             "name": "Senura Maneth",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-04-20"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-04-20",
+            "days_inactive": 603
         },
         {
             "name": "Sineth Dewpura",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-04-20"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-04-20",
+            "days_inactive": 603
         },
         {
             "name": "Sithumin Prabashrawa",
-            "risk_level": "High (Churn)",
-            "reason": "Inactive for >90 days",
-            "last_active": "2024-04-20"
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-04-20",
+            "days_inactive": 603
+        },
+        {
+            "name": "Lakshan Wijesinha",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-09",
+            "days_inactive": 553
+        },
+        {
+            "name": "Sudeera Rathnayake",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-09",
+            "days_inactive": 553
+        },
+        {
+            "name": "Amaya Dewindi",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Ashen Randira,Sahan Senanayake , Asanka Basnayake,Chanuka Bandara ,AchinthaWeerasinghe ,Kavindu Lakshan",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Chamodi thennakoon",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Hansika sewwandi",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Hasheen Sachintha",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Hashith Dewinda",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Heshan kavishka",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
+        },
+        {
+            "name": "Himashi udunuwara",
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 90 Days",
+            "last_active": "2024-06-10",
+            "days_inactive": 552
         }
     ],
     "ai_demand_predictions": [
@@ -134,7 +344,67 @@
         {
             "school": "Mr/Diddenipotha Maha Vidyalaya",
             "demand_score": 7.0
+        },
+        {
+            "school": "Mr/Ottigamuwa Maha Vidyalaya",
+            "demand_score": 6.76
+        },
+        {
+            "school": "Sp/Mr/Dandeniya Kanishta Vidyalaya",
+            "demand_score": 6.72
+        },
+        {
+            "school": "Mr/Mirissa Dharmasara Kanitu Vidyalaya",
+            "demand_score": 6.59
+        },
+        {
+            "school": "Mr/Koraburuwana Maha Vidyalaya",
+            "demand_score": 6.46
+        },
+        {
+            "school": "Mr/Iriyathota Maha Vidyalaya",
+            "demand_score": 6.46
+        },
+        {
+            "school": "Mr/Thumbhe Kanitu Vidyalaya",
+            "demand_score": 6.44
+        },
+        {
+            "school": "Nadugala Maha Vidyalaya",
+            "demand_score": 6.34
+        },
+        {
+            "school": "Naimbala Bandaththara Maha Vidyalaya",
+            "demand_score": 6.34
+        },
+        {
+            "school": "Mr/Arankahadeniya Maha Vidyalaya",
+            "demand_score": 6.2
+        },
+        {
+            "school": "Mr/Sapugoda Rathanapala Kanitu Vidyalaya",
+            "demand_score": 6.1
+        },
+        {
+            "school": "Mr/Naotunna Kanitu Vidyalaya",
+            "demand_score": 5.97
+        },
+        {
+            "school": "Mr/Babarenda Saddarmaraja Vidyalaya",
+            "demand_score": 5.9
+        },
+        {
+            "school": "Sp/Mr/Bengamuwa Secondary School",
+            "demand_score": 5.87
+        },
+        {
+            "school": "Mr/Angunna Badulla Vidyalaya",
+            "demand_score": 5.74
+        },
+        {
+            "school": "Mr/Ransegoda Utura Maha Vidyalaya",
+            "demand_score": 5.66
         }
     ],
-    "ai_remarks_insights": "Here are 10 bullet points on key operational issues or praise derived from the seminar remarks:\n\n**Praise:**\n\n*   **Exceptional School and Stakeholder Support:** The host school, including the Principal, teachers, staff, and even students and parents, demonstrated very strong and often \"full support\" for the seminar, making organizers \"feel free to continue our program.\"\n*   **Overwhelmingly Positive Feedback and Success:** The seminar consistently received \"good feedback\" and \"positive feedbacks\" from participants, children, and teachers, leading to declarations of a \"successful seminar\" and it being \"very good.\"\n*   **Strong Student Engagement and Participation:** Students were described as \"nice\" and \"enthusiastically participated,\" working hard during the program.\n*   **Dedicated and Inspiring Teacher/Principal Efforts:** The principal and teachers were highlighted not just for their support but also for their dedication, efforts, and ability to \"inspire and motivate\" the organizers, especially in schools with \"less facilities.\"\n*   **Organizer's Commitment and Intensive Program Format:** The organizing team put in \"maximum\" effort, even conducting an intensive \"2 days night seminar from 8am to midnight\" including a \"night camp,\" indicating a high level of commitment.\n\n**Operational Issues:**\n\n*   **Internal Team (GS Team) Performance Gaps:** There were explicit mentions of \"downs\" and \"disappointment\" within the organizing \"GS team,\" with a clear directive for them to \"do better than this next time,\" suggesting internal coordination or execution challenges.\n*   **Lack of Subject-Specific Teachers at Host School:** A significant contextual issue was the absence of Maths teachers, requiring the subject to be taught by a teacher of a different subject, which could impact the specialized content delivery.\n*   **Limited Seminar Duration/Time Constraint:** Organizers noted they \"only got one day\" for the seminar, indicating a desire for more time or a limitation on what could be covered within the allocated period.\n*   **Student Discipline/Manners:** While students were engaged, one remark specifically noted a \"lack of manners,\" suggesting potential challenges in participant management or behavioral expectations.\n*   **High Demand for Future Programs:** While a positive outcome, the consistent request and belief from the school that organizers \"will do another programme like this,\" coupled with the organizers' own hopes \"to do another seminar\" or \"a paper seminar,\" points to an operational demand for sustained engagement and follow-up activities."
+    "ai_remarks_insights": "*   **Cultivate strong school support:** Principal, teacher, and parent backing are consistently critical for seminar success.\n*   **Address internal team performance:** Improve GS team consistency; previous events highlighted specific operational \"downs.\"\n*   **Capitalize on high demand:** Schools expressed strong interest in repeat and extended program engagements.\n*   **Leverage positive reception:** Feedback from students and teachers confirms high value and enthusiastic participation.\n*   **Adapt to diverse school conditions:** Be prepared for varied faculty structures (e.g., non-subject specific teachers) and explore extended seminar formats."
 }
