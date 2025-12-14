@@ -57,8 +57,6 @@ def fetch_data():
     else:
         live_data = pd.DataFrame()
 
-    # Try UTF-8 first, fallback to Latin-1 only if necessary
-    # Note: The fallback is often what creates the "Mojibake" (À¶½...) errors
     try:
         historical_data = pd.read_csv(CSV_PATH, encoding='utf-8-sig')
     except Exception as e:
@@ -69,37 +67,18 @@ def fetch_data():
     return combined_df
 
 def remove_corrupted_rows(df):
-    """
-    Detects and removes rows containing encoding errors (Mojibake).
-    Pattern: Characters in Latin-1 Supplement range (0x80-0xFF) 
-    which appear when UTF-8 (Sinhala/Tamil) is misread as Latin-1.
-    """
     initial_count = len(df)
-    
-    # Columns to check for corruption
     check_cols = ['Name of the School ', 'District', 'Type of Seminar', 'Medium']
-    # Only check columns that actually exist
     check_cols = [c for c in check_cols if c in df.columns]
 
     def is_corrupted(text):
         if not isinstance(text, str): return False
-        
-        # 1. Normalize: Replace Non-Breaking Space (\u00A0) with normal space 
-        # (NBSP is valid, we don't want to delete rows because of it)
         text = text.replace('\u00A0', ' ')
-        
-        # 2. Check for Replacement Character ()
         if '\ufffd' in text: return True
-        
-        # 3. Check for Mojibake Pattern (High-ASCII junk like À, ¶, ½)
-        # Sinhala/Tamil are > 0x0800, so they won't trigger this.
-        # English is < 0x0080. 
-        # This range (0x80 - 0xFF) captures the specific corruption you saw.
         if re.search(r'[\u0080-\u00FF]', text):
             return True
         return False
 
-    # Apply filter
     mask = df[check_cols].applymap(is_corrupted).any(axis=1)
     df_clean = df[~mask].copy()
     
@@ -112,20 +91,18 @@ def remove_corrupted_rows(df):
 def clean_data(df):
     print(f"Cleaning data... Initial count: {len(df)}")
     
-    # 0. PRE-CLEAN: Remove corrupted encoding rows
     df = remove_corrupted_rows(df)
     
-    # 1. Standardize Dates
+    # Standardize Dates
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
 
-    # 2. Text Normalization
+    # Text Normalization
     text_columns = ['District', 'Name of the School ', 'Medium', 'Type of Seminar']
     for col in text_columns:
         if col in df.columns:
-            # Strip, Title Case, and remove accidental non-breaking spaces
             df[col] = df[col].astype(str).str.strip().str.replace('\u00A0', ' ').str.title()
 
-    # 3. Volunteer Parsing
+    # Volunteer Parsing
     volunteer_cols = [c for c in df.columns if 'Sasnaka Sansada member' in c]
     volunteer_col = volunteer_cols[0] if volunteer_cols else None
 
@@ -148,39 +125,29 @@ def clean_data(df):
     print(f"Data cleaned. Rows remaining: {len(df)}")
     return df
 
-# --- REPORT GENERATOR EXPORT ---
 def export_report_data(df):
     print("Exporting data for Report Generator...")
-    
-    # Select safe, public columns
-    safe_columns = [
-        'Date', 'District', 'Name of the School ', 'Type of Seminar', 
-        'Medium', 'Number of Students participated'
-    ]
-    
+    safe_columns = ['Date', 'District', 'Name of the School ', 'Type of Seminar', 'Medium', 'Number of Students participated']
     existing_cols = [c for c in safe_columns if c in df.columns]
     report_df = df[existing_cols].copy()
-    
     report_df['Date'] = report_df['Date'].dt.strftime('%Y-%m-%d')
-    
     if 'clean_volunteers' in df.columns:
         report_df['Volunteers'] = df['clean_volunteers'].apply(lambda x: ", ".join(x) if isinstance(x, list) else str(x))
     
-    # Force UTF-8 encoding to prevent new errors
     with open('reports_data.json', 'w', encoding='utf-8') as f:
         json.dump(report_df.to_dict(orient='records'), f, indent=4, ensure_ascii=False)
         
     print(f"Success! reports_data.json created with {len(report_df)} records.")
 
-# --- AI MODEL 1: RESOURCE FORECASTER ---
+# --- AI MODEL 1: RESOURCE FORECASTER (VOLUME PREDICTOR) ---
 def run_resource_forecaster(df):
-    print("Running AI Model 1: Resource Forecaster...")
+    print("Running AI Model 1: Resource Forecaster (Volume)...")
     try:
         model_df = df.copy()
         model_df = model_df.dropna(subset=['Date', 'District'])
-        
         if len(model_df) < 10: return {}
 
+        # 1. Train Model for "Intensity" (Students per Seminar)
         model_df['Month'] = model_df['Date'].dt.month
         model_df['Is_Exam_Season'] = model_df['Month'].isin([5, 8, 12]).astype(int)
         
@@ -191,13 +158,24 @@ def run_resource_forecaster(df):
         model = XGBRegressor(n_estimators=100, objective='reg:squarederror', random_state=42)
         model.fit(X, y)
 
+        # 2. Calculate "Velocity" (Avg Seminars per Month per District)
+        # Group by District and Month to count seminars
+        velocity_df = model_df.groupby(['District', 'Month']).size().reset_index(name='seminar_count')
+        # Average frequency for that district in that month
+        avg_velocity = velocity_df.groupby(['District', 'Month'])['seminar_count'].mean().to_dict()
+
+        # 3. Predict Next Month for ALL Districts
         next_month = (datetime.now() + timedelta(days=30)).month
         is_exam = 1 if next_month in [5, 8, 12] else 0
         
         forecasts = {}
-        top_districts = df['District'].value_counts().head(5).index.tolist()
+        # Get ALL districts that exist in the data
+        all_districts = df['District'].unique().tolist()
 
-        for district in top_districts:
+        for district in all_districts:
+            if not isinstance(district, str) or district == 'nan': continue
+
+            # A. Predict Intensity (Size of one seminar)
             input_data = {'Month': [next_month], 'Is_Exam_Season': [is_exam]}
             for col in X.columns:
                 if col.startswith('District_'):
@@ -205,20 +183,31 @@ def run_resource_forecaster(df):
                     input_data[col] = [1 if dist_name == district else 0]
             
             input_df = pd.DataFrame(input_data).reindex(columns=X.columns, fill_value=0)
-            pred_students = max(0, int(model.predict(input_df)[0]))
+            intensity = max(0, int(model.predict(input_df)[0]))
+            
+            # B. Get Velocity (How many seminars usually happen?)
+            # Default to 1 if no history for this specific month
+            velocity = avg_velocity.get((district, next_month), 1)
+            # If velocity is less than 1 (e.g. 0.5 means once every 2 years), round up to at least 1 for planning
+            estimated_seminars = max(1, round(velocity))
+
+            # C. Total Volume
+            total_students = intensity * estimated_seminars
             
             forecasts[district] = {
-                "predicted_students": pred_students,
-                "paper_sheets_needed": int(pred_students * 5 * 1.15)
+                "predicted_students": total_students,
+                "estimated_seminars": estimated_seminars,
+                "paper_sheets_needed": int(total_students * 1 * 1.15) # 15% buffer
             }
+            
         return forecasts
     except Exception as e:
         print(f"Resource Forecaster Error: {e}")
         return {}
 
-# --- AI MODEL 2: VOLUNTEER RISK ---
+# --- AI MODEL 2: VOLUNTEER RISK (TRAFFIC LIGHT SYSTEM) ---
 def run_volunteer_risk_model(df):
-    print("Running AI Model 2: Volunteer Risk...")
+    print("Running AI Model 2: Volunteer Risk (Traffic Light)...")
     try:
         vol_data = []
         for _, row in df.iterrows():
@@ -236,26 +225,42 @@ def run_volunteer_risk_model(df):
             group = group.sort_values('Date')
             last_active = group['Date'].max()
             days_inactive = (current_date - last_active).days
+            
             recent_events = group[group['Date'] > (current_date - timedelta(days=30))]
-            risk_level = "Low"
+            risk_level = "Safe"
+            color = "green"
             reason = ""
 
+            # Traffic Light Logic
             if days_inactive > 90:
-                risk_level = "High (Churn)"
-                reason = "Inactive for >90 days"
+                risk_level = "Critical"
+                color = "red"
+                reason = "Inactive > 90 Days"
+            elif days_inactive > 60:
+                risk_level = "High"
+                color = "orange"
+                reason = "Inactive > 60 Days"
+            elif days_inactive > 30:
+                risk_level = "Moderate"
+                color = "yellow"
+                reason = "Inactive > 30 Days"
             elif len(recent_events) >= 4:
-                risk_level = "Medium (Burnout)"
-                reason = f"{len(recent_events)} seminars in last 30 days"
+                risk_level = "Burnout Risk"
+                color = "purple"
+                reason = f"{len(recent_events)} seminars in 30 days"
 
-            if risk_level != "Low":
+            if risk_level != "Safe":
                 risky_volunteers.append({
                     "name": name,
                     "risk_level": risk_level,
+                    "color": color,
                     "reason": reason,
-                    "last_active": last_active.strftime('%Y-%m-%d')
+                    "last_active": last_active.strftime('%Y-%m-%d'),
+                    "days_inactive": days_inactive
                 })
 
-        return sorted(risky_volunteers, key=lambda x: x['last_active'])[:10]
+        # Return top 20 risks sorted by inactivity
+        return sorted(risky_volunteers, key=lambda x: x['days_inactive'], reverse=True)[:20]
     except Exception as e:
         print(f"Volunteer Risk Error: {e}")
         return []
@@ -268,10 +273,8 @@ def run_demand_model(df):
         for _, row in df.iterrows():
             school_raw = row.get('Name of the School ', '')
             if pd.isna(school_raw) or str(school_raw).strip() == '': continue
-            
             school = str(school_raw).strip()
             G.add_node(school, type='school')
-            
             for vol in row['clean_volunteers']:
                 G.add_node(vol, type='volunteer')
                 G.add_edge(school, vol)
@@ -283,16 +286,16 @@ def run_demand_model(df):
         for school in schools:
             neighbors = [n for n in G.neighbors(school) if G.nodes[n].get('type') == 'volunteer']
             if not neighbors: continue
-            
             score = np.mean([centrality[n] for n in neighbors]) * 1000 
             predictions.append({"school": school, "demand_score": round(score, 2)})
             
-        return sorted(predictions, key=lambda x: x['demand_score'], reverse=True)[:5]
+        # Increased limit to Top 20
+        return sorted(predictions, key=lambda x: x['demand_score'], reverse=True)[:20]
     except Exception as e:
         print(f"Demand Model Error: {e}")
         return []
 
-# --- GEMINI API ---
+# --- GEMINI API (CONCISE) ---
 def run_remarks_analysis(df):
     print("Running Gemini AI for Remarks...")
     remarks_col = "Any remarks on the school or seminar."
@@ -301,7 +304,6 @@ def run_remarks_analysis(df):
     remarks_series = df[remarks_col].dropna().astype(str)
     remarks_series = remarks_series[remarks_series.str.len() > 5]
     all_remarks = remarks_series.tolist()
-    
     if len(all_remarks) > 50: all_remarks = all_remarks[-50:]
 
     insights_text = "No insights available."
@@ -309,7 +311,8 @@ def run_remarks_analysis(df):
         try:
             genai.configure(api_key=GEMINI_API_KEY)
             model = genai.GenerativeModel('gemini-2.5-flash')
-            prompt = f"Analyze these seminar remarks and give 10 bullet points on key operational issues or praise: {all_remarks}"
+            # Updated Prompt for Conciseness
+            prompt = f"Analyze these seminar remarks. Output EXACTLY 5 short, punchy bullet points summarizing key operational insights. No intro, no outro. Remarks: {all_remarks}"
             response = model.generate_content(prompt)
             insights_text = response.text
         except Exception as e:
@@ -321,7 +324,6 @@ def main():
     try:
         df = fetch_data()
         df = clean_data(df)
-
         export_report_data(df)
 
         resource_forecast = run_resource_forecaster(df)
