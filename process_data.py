@@ -225,7 +225,7 @@ def run_volunteer_risk_model(df):
                 pass 
 
             # We only care about the inactive pool for the distribution logic
-            if days_inactive > 30:
+            if days_inactive > 90:
                 risk_pool.append({
                     "name": name,
                     "last_active": last_active.strftime('%Y-%m-%d'),
