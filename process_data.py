@@ -219,13 +219,13 @@ def run_volunteer_risk_model(df):
             days_inactive = (current_date - last_active).days
             
             # Check for Burnout independent of inactivity
-            recent_events = group[group['Date'] > (current_date - timedelta(days=90))]
+            recent_events = group[group['Date'] > (current_date - timedelta(days=100))]
             if len(recent_events) >= 4:
                 # Burnout is separate, keep it as is
                 pass 
 
             # We only care about the inactive pool for the distribution logic
-            if days_inactive > 90:
+            if days_inactive > 500:
                 risk_pool.append({
                     "name": name,
                     "last_active": last_active.strftime('%Y-%m-%d'),
