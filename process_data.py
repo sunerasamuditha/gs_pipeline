@@ -186,7 +186,7 @@ def run_resource_forecaster(df):
             forecasts[district] = {
                 "predicted_students": total_students,
                 "estimated_seminars": estimated_seminars,
-                "paper_sheets_needed": int(total_students * 5 * 1.15)
+                "paper_sheets_needed": int(total_students * 1 * 1.15)
             }
             
         return forecasts
