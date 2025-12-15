@@ -1,10 +1,10 @@
 {
     "last_updated": "2025-12-15",
-    "total_seminars": 2096,
-    "total_students": 107894,
+    "total_seminars": 2097,
+    "total_students": 107944,
     "district_breakdown": {
         "Matara": 273,
-        "Galle": 259,
+        "Galle": 260,
         "Colombo": 240,
         "Kalutara": 216,
         "Gampaha": 202,
@@ -42,9 +42,9 @@
             "paper_sheets_needed": 1138
         },
         "Kalutara": {
-            "predicted_students": 682,
+            "predicted_students": 671,
             "estimated_seminars": 11,
-            "paper_sheets_needed": 784
+            "paper_sheets_needed": 771
         },
         "Galle": {
             "predicted_students": 891,
@@ -67,9 +67,9 @@
             "paper_sheets_needed": 873
         },
         "Monaragala": {
-            "predicted_students": 232,
+            "predicted_students": 230,
             "estimated_seminars": 2,
-            "paper_sheets_needed": 266
+            "paper_sheets_needed": 264
         },
         "Ratnapura": {
             "predicted_students": 515,
@@ -87,9 +87,9 @@
             "paper_sheets_needed": 561
         },
         "Kurunegala": {
-            "predicted_students": 62,
+            "predicted_students": 64,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 71
+            "paper_sheets_needed": 73
         },
         "Anuradhapura": {
             "predicted_students": 610,
@@ -97,9 +97,9 @@
             "paper_sheets_needed": 701
         },
         "Puttlam": {
-            "predicted_students": 54,
+            "predicted_students": 56,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 62
+            "paper_sheets_needed": 64
         },
         "Matara": {
             "predicted_students": 399,
@@ -117,24 +117,24 @@
             "paper_sheets_needed": 77
         },
         "Kegalle": {
-            "predicted_students": 270,
+            "predicted_students": 275,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 310
+            "paper_sheets_needed": 316
         },
         "Badulla": {
-            "predicted_students": 22,
+            "predicted_students": 21,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 25
+            "paper_sheets_needed": 24
         },
         "Batticaloa": {
-            "predicted_students": 34,
+            "predicted_students": 35,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 39
+            "paper_sheets_needed": 40
         },
         "Mannar": {
-            "predicted_students": 29,
+            "predicted_students": 27,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 33
+            "paper_sheets_needed": 31
         },
         "Trincomalee": {
             "predicted_students": 27,
@@ -147,9 +147,9 @@
             "paper_sheets_needed": 0
         },
         "Mulativu": {
-            "predicted_students": 50,
+            "predicted_students": 48,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 57
+            "paper_sheets_needed": 55
         },
         "Kilinochchi": {
             "predicted_students": 27,
@@ -483,11 +483,11 @@
         },
         {
             "school": "Mr/Ransegoda Utura Maha Vidyalaya",
-            "demand_score": 5.66
+            "demand_score": 5.65
         },
         {
             "school": "Kolawenigama Kanitu Vidyalaya",
-            "demand_score": 5.66
+            "demand_score": 5.65
         },
         {
             "school": "Mr/Godauda Maha Vidyalaya",
@@ -499,7 +499,7 @@
         },
         {
             "school": "Mr/Bamunugama Maha Vidyalaya",
-            "demand_score": 5.47
+            "demand_score": 5.46
         },
         {
             "school": "Mr/Wawwa Vidyalaya",
@@ -571,15 +571,15 @@
         },
         {
             "school": "Mr/Aparekka Maha Vidyalaya",
-            "demand_score": 4.66
+            "demand_score": 4.65
         },
         {
             "school": "Mr/Mantinda Vidyathana Piruwena",
-            "demand_score": 4.66
+            "demand_score": 4.65
         },
         {
             "school": "Mr/Anagarika Dharmapala Kanitu Vidyalaya",
-            "demand_score": 4.66
+            "demand_score": 4.65
         },
         {
             "school": "Mr/Belideniya Maha Vidyalaya",
@@ -647,7 +647,7 @@
         },
         {
             "school": "Lankagama Maha Vidyalaya",
-            "demand_score": 4.05
+            "demand_score": 4.04
         },
         {
             "school": "Mr/Polwathumodara Maha Vidyalaya",
@@ -715,7 +715,7 @@
         },
         {
             "school": "Mr/Anura Vidyalaya",
-            "demand_score": 3.74
+            "demand_score": 3.73
         },
         {
             "school": "Gan Ima Kanishta Vidyalaya",
@@ -726,24 +726,24 @@
             "demand_score": 3.65
         },
         {
-            "school": "Mr/Annur Maha Vidyalaya",
+            "school": "Sp/Mr/Nawimana Mharaja Maha Vidyalaya",
             "demand_score": 3.63
+        },
+        {
+            "school": "Mr/Annur Maha Vidyalaya",
+            "demand_score": 3.62
         },
         {
             "school": "Mr/Assafa Kanitu Vidyalaya",
-            "demand_score": 3.63
+            "demand_score": 3.62
         },
         {
             "school": "Mr/Welipitiya Zahira Maha Vidyalaya",
-            "demand_score": 3.63
+            "demand_score": 3.62
         },
         {
             "school": "Mr/Godapitiya Sadhath Maha Vidyalaya",
-            "demand_score": 3.63
-        },
-        {
-            "school": "Sp/Mr/Nawimana Mharaja Maha Vidyalaya",
-            "demand_score": 3.63
+            "demand_score": 3.62
         },
         {
             "school": "A/Rahula Vidyalaya",
@@ -782,10 +782,6 @@
             "demand_score": 3.34
         },
         {
-            "school": "Mahanama Maha Vidyalaya",
-            "demand_score": 3.32
-        },
-        {
             "school": "Mr/Radampala Sri Sumangala Maha Vidyalaya",
             "demand_score": 3.32
         },
@@ -806,8 +802,12 @@
             "demand_score": 3.32
         },
         {
+            "school": "Mahanama Maha Vidyalaya",
+            "demand_score": 3.31
+        },
+        {
             "school": "A/Mahamankadawala Vidhyalaya",
-            "demand_score": 3.3
+            "demand_score": 3.29
         },
         {
             "school": "Kiripedda Kanishta Vidyalaya",
@@ -818,12 +818,12 @@
             "demand_score": 3.13
         },
         {
-            "school": "Kadihingala Maha Vidyalaya",
+            "school": "Mr/Ullala Maha Vidyalaya",
             "demand_score": 3.05
         },
         {
-            "school": "Mr/Ullala Maha Vidyalaya",
-            "demand_score": 3.05
+            "school": "Kadihingala Maha Vidyalaya",
+            "demand_score": 3.04
         },
         {
             "school": "Sp/Mr/Mawarala Srimath Angarika Dharmapala M.V",
@@ -838,5 +838,5 @@
             "demand_score": 3.02
         }
     ],
-    "ai_remarks_insights": "*   Strong school support (principal, teachers, parents) is consistently crucial for seminar success.\n*   Student engagement and enthusiastic participation are common positive outcomes.\n*   Seminars generally receive consistent positive feedback from schools, teachers, and students.\n*   Internal team performance (e.g., \"GS team\") needs consistent execution and improvement.\n*   Adaptability is required for schools lacking specific subject teachers, necessitating flexible teaching solutions.\n*   High dedication and maximum effort from all seminar members and volunteers are key success factors.\n*   Schools frequently express interest in follow-up programs or additional seminars, such as \"paper seminars.\"\n*   Seminar formats vary successfully, including multi-day programs and \"night camps.\"\n*   The repeated mention of \"seminar cluster\" suggests a defined or standardized operational model for these events.\n*   Building strong school relationships leads to appreciation and belief in future collaborations."
+    "ai_remarks_insights": "*   Sustained school support from principals, teachers, parents, and staff is vital for seminar success.\n*   Consistently positive feedback confirms the program's value and impact on participants.\n*   Internal team performance (GS team) needs improvement, with identified operational \"downs.\"\n*   Resource constraints, such as lack of subject-specific teachers, require operational adaptation.\n*   High demand exists for repeat and follow-up programs in participating schools.\n*   Student enthusiasm and active participation were key to seminar engagement.\n*   Diverse program formats, including multi-day and night camps, were successfully executed.\n*   Teacher dedication and support were critical, especially in schools with limited facilities.\n*   Volunteer and internal member support (Sasnaka team) is essential for successful execution.\n*   Addressing student conduct/manners may be a future operational consideration for some schools."
 }
