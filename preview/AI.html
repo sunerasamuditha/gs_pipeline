@@ -52,15 +52,12 @@
             border-radius: 20px;
         }
 
-        /* Grid Layout */
         .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            /* Auto rows */
+            gap: 1.5rem;           
         }
-
-        /* Card Styles */
+        
         .card {
             background: var(--card-bg);
             border: var(--glass-border);
@@ -83,7 +80,6 @@
             align-items: center;
         }
 
-        /* Specific Card Placements */
         .kpi-card {
             grid-column: span 1;
             background: linear-gradient(145deg, #18181b 0%, #202025 100%);
@@ -95,12 +91,19 @@
 
         .chart-card {
             grid-column: span 3;
-            min-height: 450px; /* Ensure enough height for chart */
+            min-height: 450px; 
         }
 
         .anomalies-card {
             grid-column: span 1;
-            max-height: 450px; /* Match chart height roughly */
+            max-height: 450px; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .reports-card {
+            grid-column: span 4;
+            max-height: 500px;
             display: flex;
             flex-direction: column;
         }
@@ -116,7 +119,7 @@
             font-size: 0.9rem;
             line-height: 1.6;
             color: #d4d4d8;
-            max-height: 120px; /* Limit height of text */
+            max-height: 120px; 
             overflow-y: auto;
         }
         .insights-content strong { color: var(--accent-primary); }
@@ -125,14 +128,14 @@
             position: relative;
             flex: 1;
             width: 100%;
-            min-height: 0; /* Important for flex child to shrink */
+            min-height: 0; 
         }
 
         .table-container {
             flex: 1;
             overflow-y: auto;
             margin-top: 0.5rem;
-            min-height: 0; /* Important for flex overflow */
+            min-height: 0; 
         }
 
         table {
@@ -165,8 +168,7 @@
             font-size: 0.75rem;
             font-weight: 600;
         }
-
-        /* Responsive */
+       
         @media (max-width: 1200px) {
             .dashboard-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -184,9 +186,8 @@
             .kpi-card, .insights-card, .chart-card, .anomalies-card {
                 grid-column: span 1;
             }
-        }
-        
-        /* Scrollbars */
+        }        
+       
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
@@ -249,14 +250,44 @@
                 </table>
             </div>
         </div>
+
+        <!-- Row 3 -->
+        <div class="card reports-card">
+            <div class="card-title">Recent Seminar Reports</div>
+            <div class="table-container">
+                <table id="reports-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>District</th>
+                            <th>School</th>
+                            <th>Type</th>
+                            <th>Medium</th>
+                            <th>Students</th>
+                            <th>Volunteers</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
         async function loadDashboardData() {
             try {
-                const response = await fetch('../dashboard_data.json');
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const data = await response.json();
+                const [dashboardResponse, reportsResponse] = await Promise.all([
+                    fetch('../dashboard_data.json'),
+                    fetch('../reports_data.json')
+                ]);
+
+                if (!dashboardResponse.ok) throw new Error(`Dashboard data error! status: ${dashboardResponse.status}`);
+                if (!reportsResponse.ok) throw new Error(`Reports data error! status: ${reportsResponse.status}`);
+
+                const data = await dashboardResponse.json();
+                const reportsData = await reportsResponse.json();
 
                 document.getElementById('last-updated').textContent = data.last_updated;
                 animateValue("total-seminars", 0, data.total_seminars, 1000);
@@ -264,6 +295,7 @@
                 document.getElementById('nlp-insights').innerHTML = marked.parse(data.ai_remarks_insights);
                 renderChart(data.district_breakdown);
                 renderVolunteerRisks(data.ai_volunteer_risks);
+                renderReports(reportsData);
 
             } catch (error) {
                 console.error('Error:', error);
@@ -330,6 +362,32 @@
                     <td style="white-space: nowrap;">${item.name}</td>
                     <td><span class="anomaly-badge" style="color: ${item.color}; background: rgba(${item.color === 'red' ? '239, 68, 68' : '255, 255, 255'}, 0.15);">${item.risk_level}</span></td>
                     <td style="text-align: right; font-weight: bold; color: #a1a1aa;">${item.days_inactive}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        function renderReports(reports) {
+            const tbody = document.querySelector('#reports-table tbody');
+            tbody.innerHTML = '';
+            reports.slice(0, 50).forEach(item => {
+                const row = document.createElement('tr');
+                const schoolName = item['Name of the School '].length > 30 
+                    ? item['Name of the School '].substring(0, 30) + '...' 
+                    : item['Name of the School '];
+                
+                const volunteers = item['Volunteers'] ? (item['Volunteers'].length > 30 
+                    ? item['Volunteers'].substring(0, 30) + '...' 
+                    : item['Volunteers']) : 'N/A';
+
+                row.innerHTML = `
+                    <td style="white-space: nowrap;">${item.Date}</td>
+                    <td>${item.District}</td>
+                    <td title="${item['Name of the School ']}">${schoolName}</td>
+                    <td>${item['Type of Seminar']}</td>
+                    <td>${item.Medium}</td>
+                    <td style="text-align: right;">${item['Number of Students participated']}</td>
+                    <td title="${item['Volunteers']}">${volunteers}</td>
                 `;
                 tbody.appendChild(row);
             });
