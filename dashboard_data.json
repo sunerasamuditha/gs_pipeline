@@ -1,5 +1,5 @@
 {
-    "last_updated": "2025-12-14",
+    "last_updated": "2025-12-15",
     "total_seminars": 2096,
     "total_students": 107894,
     "district_breakdown": {
@@ -164,33 +164,9 @@
     },
     "ai_volunteer_risks": [
         {
-            "name": "Anupama Perera",
-            "last_active": "2025-09-16",
-            "days_inactive": 89,
-            "risk_level": "Critical",
-            "color": "red",
-            "reason": "Inactive > 70 Days"
-        },
-        {
-            "name": "Imesh Sadaruvan",
-            "last_active": "2025-09-16",
-            "days_inactive": 89,
-            "risk_level": "Critical",
-            "color": "red",
-            "reason": "Inactive > 70 Days"
-        },
-        {
-            "name": "Savidu Gihan",
-            "last_active": "2025-09-16",
-            "days_inactive": 89,
-            "risk_level": "Critical",
-            "color": "red",
-            "reason": "Inactive > 70 Days"
-        },
-        {
             "name": "Ashen Randira",
             "last_active": "2025-09-17",
-            "days_inactive": 88,
+            "days_inactive": 89,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -198,7 +174,7 @@
         {
             "name": "Kavindu Samaraweera",
             "last_active": "2025-09-17",
-            "days_inactive": 88,
+            "days_inactive": 89,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -206,7 +182,7 @@
         {
             "name": "Lahiru Bandara",
             "last_active": "2025-09-17",
-            "days_inactive": 88,
+            "days_inactive": 89,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -214,7 +190,7 @@
         {
             "name": "Sanduni",
             "last_active": "2025-09-17",
-            "days_inactive": 88,
+            "days_inactive": 89,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -222,7 +198,7 @@
         {
             "name": "Theja",
             "last_active": "2025-09-17",
-            "days_inactive": 88,
+            "days_inactive": 89,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -230,7 +206,7 @@
         {
             "name": "Ann Senanayaka",
             "last_active": "2025-09-18",
-            "days_inactive": 87,
+            "days_inactive": 88,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -238,7 +214,31 @@
         {
             "name": "Anujini Dasanayake",
             "last_active": "2025-09-18",
-            "days_inactive": 87,
+            "days_inactive": 88,
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 70 Days"
+        },
+        {
+            "name": "Chamindu Samarakoon",
+            "last_active": "2025-09-18",
+            "days_inactive": 88,
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 70 Days"
+        },
+        {
+            "name": "Dilmi Navanjana",
+            "last_active": "2025-09-18",
+            "days_inactive": 88,
+            "risk_level": "Critical",
+            "color": "red",
+            "reason": "Inactive > 70 Days"
+        },
+        {
+            "name": "Geethma Sathsarani",
+            "last_active": "2025-09-18",
+            "days_inactive": 88,
             "risk_level": "Critical",
             "color": "red",
             "reason": "Inactive > 70 Days"
@@ -246,7 +246,7 @@
         {
             "name": "Dewmi Imesha",
             "last_active": "2025-10-07",
-            "days_inactive": 68,
+            "days_inactive": 69,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -254,7 +254,7 @@
         {
             "name": "Nimash Sudeepa",
             "last_active": "2025-10-07",
-            "days_inactive": 68,
+            "days_inactive": 69,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -262,7 +262,7 @@
         {
             "name": "Bimisara",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -270,7 +270,7 @@
         {
             "name": "Dinum Jeewandara",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -278,7 +278,7 @@
         {
             "name": "Duvidu udantha",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -286,7 +286,7 @@
         {
             "name": "Imesh Shaluka",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -294,7 +294,7 @@
         {
             "name": "Isal Ashinsa",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -302,7 +302,7 @@
         {
             "name": "Janitha Bimsara",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -310,7 +310,7 @@
         {
             "name": "Kasun shahinda",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
@@ -318,71 +318,15 @@
         {
             "name": "Lahiru",
             "last_active": "2025-10-08",
-            "days_inactive": 67,
+            "days_inactive": 68,
             "risk_level": "High",
             "color": "orange",
             "reason": "Inactive > 50 Days"
         },
         {
-            "name": "Duvindu Udayantha",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
-            "name": "Kavindu Isuranga",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
-            "name": "Kawya Gunathilake",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
-            "name": "Pawani Kaushika",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
-            "name": "Sandani",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
-            "name": "Shaluka",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
-            "name": "Shanaka Wijesinghe",
-            "last_active": "2025-10-25",
-            "days_inactive": 50,
-            "risk_level": "Moderate",
-            "color": "yellow",
-            "reason": "Inactive > 30 Days"
-        },
-        {
             "name": "Chamod Chamikara",
             "last_active": "2025-10-27",
-            "days_inactive": 48,
+            "days_inactive": 49,
             "risk_level": "Moderate",
             "color": "yellow",
             "reason": "Inactive > 30 Days"
@@ -390,7 +334,7 @@
         {
             "name": "Keshani Attanayake",
             "last_active": "2025-10-27",
-            "days_inactive": 48,
+            "days_inactive": 49,
             "risk_level": "Moderate",
             "color": "yellow",
             "reason": "Inactive > 30 Days"
@@ -398,6 +342,62 @@
         {
             "name": "Sineth kahallewaththa",
             "last_active": "2025-10-27",
+            "days_inactive": 49,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "kaveesha akalanka",
+            "last_active": "2025-10-27",
+            "days_inactive": 49,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "kawya naduni",
+            "last_active": "2025-10-27",
+            "days_inactive": 49,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "sahan dissanayake",
+            "last_active": "2025-10-27",
+            "days_inactive": 49,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "Buddhi Hirushan",
+            "last_active": "2025-10-28",
+            "days_inactive": 48,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "Dewmi wimalasena",
+            "last_active": "2025-10-28",
+            "days_inactive": 48,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "Dinuka Perera",
+            "last_active": "2025-10-28",
+            "days_inactive": 48,
+            "risk_level": "Moderate",
+            "color": "yellow",
+            "reason": "Inactive > 30 Days"
+        },
+        {
+            "name": "Dumidu Edirisinghe",
+            "last_active": "2025-10-28",
             "days_inactive": 48,
             "risk_level": "Moderate",
             "color": "yellow",
@@ -838,5 +838,5 @@
             "demand_score": 3.02
         }
     ],
-    "ai_remarks_insights": "*   Strong school and community support is foundational for success.\n*   Positive feedback drives high demand for follow-up programs.\n*   Internal team execution requires consistent improvement.\n*   Seminars successfully address critical school-level resource gaps.\n*   Student engagement is enthusiastic but requires behavioral consideration."
+    "ai_remarks_insights": "*   Strong support from school principals, teachers, parents, and students is crucial for seminar success.\n*   Consistently positive feedback confirms the high value and appreciation of the programs.\n*   Effective internal team performance, including volunteers, is vital, though some internal teams may require improvement.\n*   Adaptability is needed for unique school circumstances, such as a lack of subject-specific teachers.\n*   There is significant demand from schools for follow-up seminars and extended engagements.\n*   Successful execution of multi-day and extended programs (e.g., night camps) demonstrates operational capacity for deeper impact.\n*   Seminars prove highly impactful in under-resourced schools, especially when supported by strong principal leadership.\n*   Future operational planning should incorporate diverse program types, such as \"paper seminars,\" to meet varied needs.\n*   Student enthusiasm is high, but managing participant manners might be an occasional consideration.\n*   The \"seminar cluster\" approach is a recurring operational model."
 }
