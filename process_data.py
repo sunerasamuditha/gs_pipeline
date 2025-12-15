@@ -323,7 +323,7 @@ def run_remarks_analysis(df):
         try:
             genai.configure(api_key=GEMINI_API_KEY)
             model = genai.GenerativeModel('gemini-2.5-flash')
-            prompt = f"Analyze these seminar remarks. Output EXACTLY 5 short, punchy bullet points summarizing key operational insights. No intro, no outro. Remarks: {all_remarks}"
+            prompt = f"Analyze these seminar remarks. Output EXACTLY 10 short, bullet points summarizing key operational insights. No intro, no outro. Remarks: {all_remarks}"
             response = model.generate_content(prompt)
             insights_text = response.text
         except Exception as e:
