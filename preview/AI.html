@@ -231,16 +231,16 @@
 
         <div class="card anomalies-card">
             <div class="card-title">
-                <span>Anomalies</span>
-                <span style="color: #f87171; font-size: 0.7rem;">Outliers Detected</span>
+                <span>Volunteer Risks</span>
+                <span style="color: #f87171; font-size: 0.7rem;">At Risk</span>
             </div>
             <div class="table-container">
                 <table id="anomalies-table">
                     <thead>
                         <tr>
-                            <th>Date</th>
-                            <th>School</th>
-                            <th>Count</th>
+                            <th>Name</th>
+                            <th>Risk Level</th>
+                            <th>Inactive Days</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -261,9 +261,9 @@
                 document.getElementById('last-updated').textContent = data.last_updated;
                 animateValue("total-seminars", 0, data.total_seminars, 1000);
                 animateValue("total-students", 0, data.total_students, 1500);
-                document.getElementById('nlp-insights').innerHTML = marked.parse(data.nlp_insights);
+                document.getElementById('nlp-insights').innerHTML = marked.parse(data.ai_remarks_insights);
                 renderChart(data.district_breakdown);
-                renderAnomalies(data.anomalies);
+                renderVolunteerRisks(data.ai_volunteer_risks);
 
             } catch (error) {
                 console.error('Error:', error);
@@ -320,20 +320,16 @@
             });
         }
 
-        function renderAnomalies(anomalies) {
+        function renderVolunteerRisks(risks) {
             const tbody = document.querySelector('#anomalies-table tbody');
             tbody.innerHTML = '';
-            anomalies.forEach(item => {
+            risks.forEach(item => {
                 const row = document.createElement('tr');
-                // Truncate school name if too long
-                const schoolName = item['Name of the School '].length > 25 
-                    ? item['Name of the School '].substring(0, 25) + '...' 
-                    : item['Name of the School '];
                 
                 row.innerHTML = `
-                    <td style="white-space: nowrap;">${item.Date}</td>
-                    <td title="${item['Name of the School ']}">${schoolName}</td>
-                    <td style="text-align: right; font-weight: bold; color: #f87171;">${item['Number of Students participated']}</td>
+                    <td style="white-space: nowrap;">${item.name}</td>
+                    <td><span class="anomaly-badge" style="color: ${item.color}; background: rgba(${item.color === 'red' ? '239, 68, 68' : '255, 255, 255'}, 0.15);">${item.risk_level}</span></td>
+                    <td style="text-align: right; font-weight: bold; color: #a1a1aa;">${item.days_inactive}</td>
                 `;
                 tbody.appendChild(row);
             });
