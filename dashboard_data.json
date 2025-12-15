@@ -34,112 +34,112 @@
         "Ampara": {
             "predicted_students": 110,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 632
+            "paper_sheets_needed": 126
         },
         "Colombo": {
             "predicted_students": 990,
             "estimated_seminars": 22,
-            "paper_sheets_needed": 5692
+            "paper_sheets_needed": 1138
         },
         "Kalutara": {
             "predicted_students": 682,
             "estimated_seminars": 11,
-            "paper_sheets_needed": 3921
+            "paper_sheets_needed": 784
         },
         "Galle": {
             "predicted_students": 891,
             "estimated_seminars": 27,
-            "paper_sheets_needed": 5123
+            "paper_sheets_needed": 1024
         },
         "Nuwara-Eliya": {
             "predicted_students": 406,
             "estimated_seminars": 7,
-            "paper_sheets_needed": 2334
+            "paper_sheets_needed": 466
         },
         "Polonnaruwa": {
             "predicted_students": 49,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 281
+            "paper_sheets_needed": 56
         },
         "Hambantota": {
             "predicted_students": 760,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 4370
+            "paper_sheets_needed": 873
         },
         "Monaragala": {
             "predicted_students": 232,
             "estimated_seminars": 2,
-            "paper_sheets_needed": 1334
+            "paper_sheets_needed": 266
         },
         "Ratnapura": {
             "predicted_students": 515,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 2961
+            "paper_sheets_needed": 592
         },
         "Gampaha": {
             "predicted_students": 495,
             "estimated_seminars": 11,
-            "paper_sheets_needed": 2846
+            "paper_sheets_needed": 569
         },
         "Matale": {
             "predicted_students": 488,
             "estimated_seminars": 8,
-            "paper_sheets_needed": 2806
+            "paper_sheets_needed": 561
         },
         "Kurunegala": {
             "predicted_students": 62,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 356
+            "paper_sheets_needed": 71
         },
         "Anuradhapura": {
             "predicted_students": 610,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 3507
+            "paper_sheets_needed": 701
         },
         "Puttlam": {
             "predicted_students": 54,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 310
+            "paper_sheets_needed": 62
         },
         "Matara": {
             "predicted_students": 399,
             "estimated_seminars": 7,
-            "paper_sheets_needed": 2294
+            "paper_sheets_needed": 458
         },
         "Kandy": {
             "predicted_students": 1068,
             "estimated_seminars": 12,
-            "paper_sheets_needed": 6140
+            "paper_sheets_needed": 1228
         },
         "Vavuniya": {
             "predicted_students": 67,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 385
+            "paper_sheets_needed": 77
         },
         "Kegalle": {
             "predicted_students": 270,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 1552
+            "paper_sheets_needed": 310
         },
         "Badulla": {
             "predicted_students": 22,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 126
+            "paper_sheets_needed": 25
         },
         "Batticaloa": {
             "predicted_students": 34,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 195
+            "paper_sheets_needed": 39
         },
         "Mannar": {
             "predicted_students": 29,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 166
+            "paper_sheets_needed": 33
         },
         "Trincomalee": {
             "predicted_students": 27,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 155
+            "paper_sheets_needed": 31
         },
         "Jaffna": {
             "predicted_students": 0,
@@ -149,17 +149,17 @@
         "Mulativu": {
             "predicted_students": 50,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 287
+            "paper_sheets_needed": 57
         },
         "Kilinochchi": {
             "predicted_students": 27,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 155
+            "paper_sheets_needed": 31
         },
         "Kurunegala⁩": {
             "predicted_students": 45,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 258
+            "paper_sheets_needed": 51
         }
     },
     "ai_volunteer_risks": [
@@ -838,5 +838,5 @@
             "demand_score": 3.02
         }
     ],
-    "ai_remarks_insights": "*   Strong support from school principals, teachers, parents, and students is crucial for seminar success.\n*   Consistently positive feedback confirms the high value and appreciation of the programs.\n*   Effective internal team performance, including volunteers, is vital, though some internal teams may require improvement.\n*   Adaptability is needed for unique school circumstances, such as a lack of subject-specific teachers.\n*   There is significant demand from schools for follow-up seminars and extended engagements.\n*   Successful execution of multi-day and extended programs (e.g., night camps) demonstrates operational capacity for deeper impact.\n*   Seminars prove highly impactful in under-resourced schools, especially when supported by strong principal leadership.\n*   Future operational planning should incorporate diverse program types, such as \"paper seminars,\" to meet varied needs.\n*   Student enthusiasm is high, but managing participant manners might be an occasional consideration.\n*   The \"seminar cluster\" approach is a recurring operational model."
+    "ai_remarks_insights": "*   Strong school support (principal, teachers, parents) is consistently crucial for seminar success.\n*   Student engagement and enthusiastic participation are common positive outcomes.\n*   Seminars generally receive consistent positive feedback from schools, teachers, and students.\n*   Internal team performance (e.g., \"GS team\") needs consistent execution and improvement.\n*   Adaptability is required for schools lacking specific subject teachers, necessitating flexible teaching solutions.\n*   High dedication and maximum effort from all seminar members and volunteers are key success factors.\n*   Schools frequently express interest in follow-up programs or additional seminars, such as \"paper seminars.\"\n*   Seminar formats vary successfully, including multi-day programs and \"night camps.\"\n*   The repeated mention of \"seminar cluster\" suggests a defined or standardized operational model for these events.\n*   Building strong school relationships leads to appreciation and belief in future collaborations."
 }
