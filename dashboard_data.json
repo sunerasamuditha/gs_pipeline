@@ -1,12 +1,12 @@
 {
     "last_updated": "2025-12-15",
     "total_seminars": 2097,
-    "total_students": 107936,
+    "total_students": 108044,
     "district_breakdown": {
         "Matara": 273,
         "Galle": 259,
         "Colombo": 240,
-        "Kalutara": 216,
+        "Kalutara": 217,
         "Gampaha": 202,
         "Anuradhapura": 156,
         "Kandy": 107,
@@ -23,7 +23,7 @@
         "Ampara": 30,
         "Kurunegala": 22,
         "Vavuniya": 11,
-        "Trincomalee": 10,
+        "Trincomalee": 9,
         "Jaffna": 3,
         "Kilinochchi": 3,
         "Mannar": 2,
@@ -32,9 +32,9 @@
     },
     "ai_resource_forecast": {
         "Ampara": {
-            "predicted_students": 107,
+            "predicted_students": 108,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 123
+            "paper_sheets_needed": 124
         },
         "Colombo": {
             "predicted_students": 990,
@@ -42,9 +42,9 @@
             "paper_sheets_needed": 1138
         },
         "Kalutara": {
-            "predicted_students": 682,
+            "predicted_students": 671,
             "estimated_seminars": 11,
-            "paper_sheets_needed": 784
+            "paper_sheets_needed": 771
         },
         "Galle": {
             "predicted_students": 891,
@@ -62,14 +62,14 @@
             "paper_sheets_needed": 56
         },
         "Hambantota": {
-            "predicted_students": 765,
+            "predicted_students": 760,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 879
+            "paper_sheets_needed": 873
         },
         "Monaragala": {
-            "predicted_students": 232,
+            "predicted_students": 230,
             "estimated_seminars": 2,
-            "paper_sheets_needed": 266
+            "paper_sheets_needed": 264
         },
         "Ratnapura": {
             "predicted_students": 515,
@@ -82,14 +82,14 @@
             "paper_sheets_needed": 569
         },
         "Matale": {
-            "predicted_students": 480,
+            "predicted_students": 488,
             "estimated_seminars": 8,
-            "paper_sheets_needed": 552
+            "paper_sheets_needed": 561
         },
         "Kurunegala": {
-            "predicted_students": 61,
+            "predicted_students": 64,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 70
+            "paper_sheets_needed": 73
         },
         "Anuradhapura": {
             "predicted_students": 610,
@@ -97,9 +97,9 @@
             "paper_sheets_needed": 701
         },
         "Puttlam": {
-            "predicted_students": 55,
+            "predicted_students": 53,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 63
+            "paper_sheets_needed": 60
         },
         "Matara": {
             "predicted_students": 399,
@@ -112,9 +112,9 @@
             "paper_sheets_needed": 1228
         },
         "Vavuniya": {
-            "predicted_students": 66,
+            "predicted_students": 68,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 75
+            "paper_sheets_needed": 78
         },
         "Kegalle": {
             "predicted_students": 275,
@@ -122,19 +122,19 @@
             "paper_sheets_needed": 316
         },
         "Badulla": {
-            "predicted_students": 21,
+            "predicted_students": 23,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 24
+            "paper_sheets_needed": 26
         },
         "Batticaloa": {
-            "predicted_students": 33,
+            "predicted_students": 34,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 37
+            "paper_sheets_needed": 39
         },
         "Mannar": {
-            "predicted_students": 27,
+            "predicted_students": 26,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 31
+            "paper_sheets_needed": 29
         },
         "Trincomalee": {
             "predicted_students": 27,
@@ -142,14 +142,14 @@
             "paper_sheets_needed": 31
         },
         "Jaffna": {
-            "predicted_students": 0,
+            "predicted_students": 2,
             "estimated_seminars": 2,
-            "paper_sheets_needed": 0
+            "paper_sheets_needed": 2
         },
         "Mulativu": {
-            "predicted_students": 50,
+            "predicted_students": 49,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 57
+            "paper_sheets_needed": 56
         },
         "Kilinochchi": {
             "predicted_students": 27,
@@ -157,9 +157,9 @@
             "paper_sheets_needed": 31
         },
         "Kurunegala⁩": {
-            "predicted_students": 45,
+            "predicted_students": 50,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 51
+            "paper_sheets_needed": 57
         }
     },
     "ai_volunteer_risks": [
@@ -647,7 +647,7 @@
         },
         {
             "school": "Lankagama Maha Vidyalaya",
-            "demand_score": 4.05
+            "demand_score": 4.04
         },
         {
             "school": "Mr/Polwathumodara Maha Vidyalaya",
@@ -715,7 +715,7 @@
         },
         {
             "school": "Mr/Anura Vidyalaya",
-            "demand_score": 3.74
+            "demand_score": 3.73
         },
         {
             "school": "Gan Ima Kanishta Vidyalaya",
@@ -807,7 +807,7 @@
         },
         {
             "school": "A/Mahamankadawala Vidhyalaya",
-            "demand_score": 3.3
+            "demand_score": 3.29
         },
         {
             "school": "Kiripedda Kanishta Vidyalaya",
@@ -838,5 +838,5 @@
             "demand_score": 3.02
         }
     ],
-    "ai_remarks_insights": "*   Consistent strong support from school staff, principals, parents, and students is critical for success.\n*   Positive feedback from all stakeholders indicates high value and effectiveness of the seminars.\n*   Future programs should address the identified lack of subject-specific teachers in some schools.\n*   Internal operational improvements are needed for the \"GS team\" to prevent future performance disappointments.\n*   Students' enthusiastic participation, despite occasional behavioral issues, is a key engagement factor.\n*   Dedicated school teachers are vital for program implementation, even when teaching outside their primary subject.\n*   There is a high demand for follow-up programs, including specialized \"paper seminars\" and multi-day formats.\n*   Seminars provide significant benefit to resource-constrained schools, reinforcing their positive impact.\n*   Flexibility in program duration, from single-day to two-day night camps, is a viable operational model.\n*   Effective communication and inspiring leadership motivate school staff to fully support and facilitate programs."
+    "ai_remarks_insights": "*   Prioritize cultivating strong support from school principals, teachers, and staff.\n*   Consistently receive and document positive feedback from school and student participants.\n*   Address and improve internal team performance to prevent operational \"downs.\"\n*   Actively plan for and pursue follow-up seminars and specialized programs (e.g., paper seminars).\n*   Adapt program content and delivery for schools with limited facilities or specialized teachers.\n*   Maximize student engagement while also addressing any noted behavioral challenges.\n*   Explore and leverage diverse seminar formats, including multi-day and night camp options.\n*   Refine and standardize the \"seminar cluster\" operational model.\n*   Capitalize on the established track record of successfully held seminars.\n*   Develop adaptable strategies for engaging with diverse school environments and resource levels."
 }
