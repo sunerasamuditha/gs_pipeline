@@ -277,7 +277,9 @@
 
     <script>
         async function loadDashboardData() {
+            console.log("Initializing Dashboard...");
             try {
+                console.log("Fetching data...");
                 const [dashboardResponse, reportsResponse] = await Promise.all([
                     fetch('../dashboard_data.json'),
                     fetch('../reports_data.json')
@@ -288,18 +290,38 @@
 
                 const data = await dashboardResponse.json();
                 const reportsData = await reportsResponse.json();
+                console.log("Data loaded successfully", { data, reportsData });
 
-                document.getElementById('last-updated').textContent = data.last_updated;
-                animateValue("total-seminars", 0, data.total_seminars, 1000);
-                animateValue("total-students", 0, data.total_students, 1500);
-                document.getElementById('nlp-insights').innerHTML = marked.parse(data.ai_remarks_insights);
-                renderChart(data.district_breakdown);
-                renderVolunteerRisks(data.ai_volunteer_risks);
-                renderReports(reportsData);
+                document.getElementById('last-updated').textContent = data.last_updated || 'N/A';
+                animateValue("total-seminars", 0, data.total_seminars || 0, 1000);
+                animateValue("total-students", 0, data.total_students || 0, 1500);
+                
+                if (typeof marked !== 'undefined' && data.ai_remarks_insights) {
+                    document.getElementById('nlp-insights').innerHTML = marked.parse(data.ai_remarks_insights);
+                } else {
+                    document.getElementById('nlp-insights').textContent = data.ai_remarks_insights || 'No insights available.';
+                }
+
+                if (data.district_breakdown) {
+                    renderChart(data.district_breakdown);
+                }
+                
+                if (data.ai_volunteer_risks) {
+                    renderVolunteerRisks(data.ai_volunteer_risks);
+                }
+                
+                if (reportsData) {
+                    renderReports(reportsData);
+                }
 
             } catch (error) {
-                console.error('Error:', error);
-                document.getElementById('nlp-insights').innerHTML = `<span style="color:#ef4444">Error loading data. Use Live Server.</span>`;
+                console.error('Error loading dashboard:', error);
+                document.getElementById('nlp-insights').innerHTML = `
+                    <div style="color:#ef4444; padding: 1rem; border: 1px solid #ef4444; border-radius: 8px; background: rgba(239, 68, 68, 0.1);">
+                        <strong>Error loading data:</strong><br>
+                        ${error.message}<br>
+                        <small>Ensure you are using a local server (e.g., Live Server extension) and JSON files exist.</small>
+                    </div>`;
             }
         }
 
@@ -316,7 +338,15 @@
         }
 
         function renderChart(districtData) {
-            const ctx = document.getElementById('districtChart').getContext('2d');
+            const canvas = document.getElementById('districtChart');
+            if (!canvas) return;
+            
+            if (typeof Chart === 'undefined') {
+                console.error("Chart.js not loaded");
+                return;
+            }
+
+            const ctx = canvas.getContext('2d');
             const sortedEntries = Object.entries(districtData).sort((a, b) => b[1] - a[1]);
             
             new Chart(ctx, {
@@ -354,14 +384,18 @@
 
         function renderVolunteerRisks(risks) {
             const tbody = document.querySelector('#anomalies-table tbody');
+            if (!tbody) return;
             tbody.innerHTML = '';
+            
+            if (!Array.isArray(risks)) return;
+
             risks.forEach(item => {
                 const row = document.createElement('tr');
                 
                 row.innerHTML = `
-                    <td style="white-space: nowrap;">${item.name}</td>
-                    <td><span class="anomaly-badge" style="color: ${item.color}; background: rgba(${item.color === 'red' ? '239, 68, 68' : '255, 255, 255'}, 0.15);">${item.risk_level}</span></td>
-                    <td style="text-align: right; font-weight: bold; color: #a1a1aa;">${item.days_inactive}</td>
+                    <td style="white-space: nowrap;">${item.name || 'Unknown'}</td>
+                    <td><span class="anomaly-badge" style="color: ${item.color || '#fff'}; background: rgba(${item.color === 'red' ? '239, 68, 68' : '255, 255, 255'}, 0.15);">${item.risk_level || 'Unknown'}</span></td>
+                    <td style="text-align: right; font-weight: bold; color: #a1a1aa;">${item.days_inactive || 0}</td>
                 `;
                 tbody.appendChild(row);
             });
@@ -369,25 +403,31 @@
 
         function renderReports(reports) {
             const tbody = document.querySelector('#reports-table tbody');
+            if (!tbody) return;
             tbody.innerHTML = '';
+            
+            if (!Array.isArray(reports)) return;
+
+            // Show only last 50 reports for performance
             reports.slice(0, 50).forEach(item => {
                 const row = document.createElement('tr');
-                const schoolName = item['Name of the School '].length > 30 
-                    ? item['Name of the School '].substring(0, 30) + '...' 
-                    : item['Name of the School '];
                 
-                const volunteers = item['Volunteers'] ? (item['Volunteers'].length > 30 
-                    ? item['Volunteers'].substring(0, 30) + '...' 
-                    : item['Volunteers']) : 'N/A';
+                let schoolName = item['Name of the School '] || 'Unknown School';
+                if (typeof schoolName !== 'string') schoolName = String(schoolName);
+                if (schoolName.length > 30) schoolName = schoolName.substring(0, 30) + '...';
+                
+                let volunteers = item['Volunteers'] || 'N/A';
+                if (typeof volunteers !== 'string') volunteers = String(volunteers);
+                if (volunteers.length > 30) volunteers = volunteers.substring(0, 30) + '...';
 
                 row.innerHTML = `
-                    <td style="white-space: nowrap;">${item.Date}</td>
-                    <td>${item.District}</td>
-                    <td title="${item['Name of the School ']}">${schoolName}</td>
-                    <td>${item['Type of Seminar']}</td>
-                    <td>${item.Medium}</td>
-                    <td style="text-align: right;">${item['Number of Students participated']}</td>
-                    <td title="${item['Volunteers']}">${volunteers}</td>
+                    <td style="white-space: nowrap;">${item.Date || '-'}</td>
+                    <td>${item.District || '-'}</td>
+                    <td title="${item['Name of the School '] || ''}">${schoolName}</td>
+                    <td>${item['Type of Seminar'] || '-'}</td>
+                    <td>${item.Medium || '-'}</td>
+                    <td style="text-align: right;">${item['Number of Students participated'] || 0}</td>
+                    <td title="${item['Volunteers'] || ''}">${volunteers}</td>
                 `;
                 tbody.appendChild(row);
             });
