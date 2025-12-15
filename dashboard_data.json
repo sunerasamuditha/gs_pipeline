@@ -32,9 +32,9 @@
     },
     "ai_resource_forecast": {
         "Ampara": {
-            "predicted_students": 108,
+            "predicted_students": 110,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 124
+            "paper_sheets_needed": 126
         },
         "Colombo": {
             "predicted_students": 990,
@@ -42,9 +42,9 @@
             "paper_sheets_needed": 1138
         },
         "Kalutara": {
-            "predicted_students": 671,
+            "predicted_students": 682,
             "estimated_seminars": 11,
-            "paper_sheets_needed": 771
+            "paper_sheets_needed": 784
         },
         "Galle": {
             "predicted_students": 891,
@@ -57,14 +57,14 @@
             "paper_sheets_needed": 466
         },
         "Polonnaruwa": {
-            "predicted_students": 49,
+            "predicted_students": 48,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 56
+            "paper_sheets_needed": 55
         },
         "Hambantota": {
-            "predicted_students": 760,
+            "predicted_students": 765,
             "estimated_seminars": 5,
-            "paper_sheets_needed": 873
+            "paper_sheets_needed": 879
         },
         "Monaragala": {
             "predicted_students": 230,
@@ -87,9 +87,9 @@
             "paper_sheets_needed": 561
         },
         "Kurunegala": {
-            "predicted_students": 64,
+            "predicted_students": 61,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 73
+            "paper_sheets_needed": 70
         },
         "Anuradhapura": {
             "predicted_students": 610,
@@ -112,9 +112,9 @@
             "paper_sheets_needed": 1228
         },
         "Vavuniya": {
-            "predicted_students": 68,
+            "predicted_students": 67,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 78
+            "paper_sheets_needed": 77
         },
         "Kegalle": {
             "predicted_students": 275,
@@ -122,9 +122,9 @@
             "paper_sheets_needed": 316
         },
         "Badulla": {
-            "predicted_students": 23,
+            "predicted_students": 21,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 26
+            "paper_sheets_needed": 24
         },
         "Batticaloa": {
             "predicted_students": 34,
@@ -157,9 +157,9 @@
             "paper_sheets_needed": 31
         },
         "Kurunegala⁩": {
-            "predicted_students": 50,
+            "predicted_students": 44,
             "estimated_seminars": 1,
-            "paper_sheets_needed": 57
+            "paper_sheets_needed": 50
         }
     },
     "ai_volunteer_risks": [
@@ -838,5 +838,5 @@
             "demand_score": 3.02
         }
     ],
-    "ai_remarks_insights": "*   Prioritize cultivating strong support from school principals, teachers, and staff.\n*   Consistently receive and document positive feedback from school and student participants.\n*   Address and improve internal team performance to prevent operational \"downs.\"\n*   Actively plan for and pursue follow-up seminars and specialized programs (e.g., paper seminars).\n*   Adapt program content and delivery for schools with limited facilities or specialized teachers.\n*   Maximize student engagement while also addressing any noted behavioral challenges.\n*   Explore and leverage diverse seminar formats, including multi-day and night camp options.\n*   Refine and standardize the \"seminar cluster\" operational model.\n*   Capitalize on the established track record of successfully held seminars.\n*   Develop adaptable strategies for engaging with diverse school environments and resource levels."
+    "ai_remarks_insights": "*   Strong support from school principals, teachers, and parents is a consistent key to seminar success.\n*   Seminars are generally well-conducted and receive positive feedback from participants.\n*   High student engagement and enthusiastic participation are common outcomes.\n*   Internal team (GS team) performance requires improvement to prevent operational \"downs.\"\n*   There is a high demand for follow-up and repeat seminars at the same schools.\n*   Flexibility is required to adapt to schools with limited facilities or specialized teachers.\n*   The \"seminar cluster\" model, hosting students from multiple schools, is an effective approach.\n*   Extended seminar durations, including multi-day or overnight programs, are successfully implemented.\n*   Student discipline or manners may occasionally require attention despite high participation.\n*   Identifying and acknowledging specific support networks (e.g., \"Sasnaka brothers and sisters\") is valued."
 }
