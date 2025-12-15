@@ -94,16 +94,13 @@ def clean_data(df):
     
     df = remove_corrupted_rows(df)
     
-    # Standardize Dates
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True, errors='coerce')
 
-    # Text Normalization
     text_columns = ['District', 'Name of the School ', 'Medium', 'Type of Seminar']
     for col in text_columns:
         if col in df.columns:
             df[col] = df[col].astype(str).str.strip().str.replace('\u00A0', ' ').str.title()
 
-    # Volunteer Parsing
     volunteer_cols = [c for c in df.columns if 'Sasnaka Sansada member' in c]
     volunteer_col = volunteer_cols[0] if volunteer_cols else None
 
@@ -198,7 +195,7 @@ def run_resource_forecaster(df):
 def run_volunteer_risk_model(df):
     print("Running AI Model 2: Volunteer Risk (Tiered Limits)...")
     try:
-        # 1. Filter Data to Last 90 Days ONLY
+    
         current_date = datetime.now()
         start_date = current_date - timedelta(days=90)
         
@@ -208,7 +205,6 @@ def run_volunteer_risk_model(df):
             print("No data in the last 90 days.")
             return []
 
-        # 2. Explode volunteers
         vol_data = []
         for _, row in recent_df.iterrows():
             if pd.isna(row['Date']): continue
@@ -218,23 +214,20 @@ def run_volunteer_risk_model(df):
         v_df = pd.DataFrame(vol_data)
         if v_df.empty: return []
 
-        # 3. Categorize into Buckets
-        bucket_critical = [] # > 70 Days
-        bucket_high = []     # > 50 Days
-        bucket_moderate = [] # > 30 Days
+        bucket_critical = [] 
+        bucket_high = []     
+        bucket_moderate = [] 
 
         for name, group in v_df.groupby('Name'):
             last_active = group['Date'].max()
-            days_inactive = (current_date - last_active).days
-            
-            # Base Object
+            days_inactive = (current_date - last_active).days            
+           
             volunteer_obj = {
                 "name": name,
                 "last_active": last_active.strftime('%Y-%m-%d'),
                 "days_inactive": days_inactive
             }
-
-            # Bucket Logic
+            
             if days_inactive > 70:
                 volunteer_obj.update({
                     "risk_level": "Critical",
@@ -259,13 +252,10 @@ def run_volunteer_risk_model(df):
                 })
                 bucket_moderate.append(volunteer_obj)
 
-        # 4. Sort and Slice Top 10 per Bucket
-        # Sort by days_inactive descending (worst first)
         bucket_critical = sorted(bucket_critical, key=lambda x: x['days_inactive'], reverse=True)[:10]
         bucket_high = sorted(bucket_high, key=lambda x: x['days_inactive'], reverse=True)[:10]
         bucket_moderate = sorted(bucket_moderate, key=lambda x: x['days_inactive'], reverse=True)[:10]
 
-        # 5. Combine (Critical first)
         final_list = bucket_critical + bucket_high + bucket_moderate
         
         print(f"Risk Model: Found {len(final_list)} risks ({len(bucket_critical)} Red, {len(bucket_high)} Orange, {len(bucket_moderate)} Yellow)")
@@ -297,9 +287,8 @@ def run_demand_model(df):
             neighbors = [n for n in G.neighbors(school) if G.nodes[n].get('type') == 'volunteer']
             if not neighbors: continue
             score = np.mean([centrality[n] for n in neighbors]) * 1000 
-            predictions.append({"school": school, "demand_score": round(score, 2)})
-            
-        # Filter: Show all schools with score >= 3.0 (Threshold based)
+            predictions.append({"school": school, "demand_score": round(score, 2)})            
+        
         filtered_predictions = [p for p in predictions if p['demand_score'] >= 3.0]
         
         return sorted(filtered_predictions, key=lambda x: x['demand_score'], reverse=True)
