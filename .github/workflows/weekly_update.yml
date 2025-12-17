@@ -1,8 +1,8 @@
 name: Weekly AI Update
 
 on:
-  schedule:
-    - cron: '0 0 * * 0' # Runs every Sunday at Midnight UTC
+  #schedule:
+   # - cron: '0 0 * * 0' # Runs every Sunday at Midnight UTC
   workflow_dispatch:      # Allows manual run via button
 
 jobs:
